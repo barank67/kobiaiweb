@@ -1,0 +1,117 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { agents, posts, solutions, techLogos, whyItems } from "../data/site";
+---
+<BaseLayout title="Kobi AI | Şirketler İçin Yapay Zeka Ajanları">
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Agentic AI ile operasyonel dönüşüm</p>
+      <h1>KOBİ'ler için yapay zeka ajanları</h1>
+      <p>
+        Muhasebe, finans, satış, satın alma ve pazarlama süreçlerinize birlikte çalışan
+        yapay zeka ajanları ekleyin.
+      </p>
+      <div class="hero-actions">
+        <a class="button primary" href="#iletisim">Demo Planla</a>
+        <a class="button ghost" href="#cozumler">Çözümleri İncele</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-label="Agentic AI ajan ağı">
+      <img src="/assets/images/agentic-ai-bg.webp" alt="" loading="eager" />
+      <div class="agent-core">Agentic AI</div>
+      {agents.map((agent, index) => <span class={`agent-node node-${index + 1}`}>{agent}</span>)}
+    </div>
+  </section>
+
+  <section class="logo-strip" aria-label="Teknoloji logoları">
+    <div class="logo-track">
+      {[...techLogos, ...techLogos].map((logo) => <span>{logo}</span>)}
+    </div>
+  </section>
+
+  <section class="intro-band">
+    <div class="reveal-box">
+      <p>Şirketler için uygulanabilir yapay zeka</p>
+      <h2>Ekibinize Yapay Zeka Ajanları Dahil Etmek İster misiniz?</h2>
+    </div>
+  </section>
+
+  <section class="section" id="cozumler">
+    <div class="section-head">
+      <p class="eyebrow">Çözümler</p>
+      <h2>Departmanlara yayılan ajan destekli iş akışları</h2>
+    </div>
+    <div class="solution-grid">
+      {solutions.map((item) => (
+        <article class="solution-card">
+          <span></span>
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section dark-section" id="neden">
+    <div class="section-head">
+      <p class="eyebrow">Neden Kobi AI?</p>
+      <h2>Süreçlerinizi anlayan, ölçülebilir sonuç üreten yapı</h2>
+    </div>
+    <div class="why-grid">
+      {whyItems.map((item) => (
+        <button class="why-card" type="button">
+          <strong>{item.title}</strong>
+          <span>{item.text}</span>
+        </button>
+      ))}
+    </div>
+  </section>
+
+  <section class="section split-feature">
+    <div>
+      <p class="eyebrow">Uygulama yaklaşımı</p>
+      <h2>Analizden canlı kullanıma kontrollü geçiş</h2>
+      <p>
+        Önce tekrar eden karar noktalarını ve veri kaynaklarını çıkarırız. Sonra ajan
+        akışlarını küçük ama etkisi ölçülebilir modüller halinde devreye alırız.
+      </p>
+    </div>
+    <div class="timeline">
+      <span>01 Süreç Haritası</span>
+      <span>02 Ajan Tasarımı</span>
+      <span>03 Pilot Kullanım</span>
+      <span>04 Ölçüm ve Yaygınlaştırma</span>
+    </div>
+  </section>
+
+  <section class="section blog-preview">
+    <div class="section-head">
+      <p class="eyebrow">Blog</p>
+      <h2>Yapay zeka ajanlarıyla ilgili içgörüler</h2>
+    </div>
+    <div class="blog-grid">
+      {posts.map((post) => (
+        <a class="blog-card" href={post.href}>
+          <figure>
+            <img src={post.image} alt={post.title} loading="eager" />
+          </figure>
+          <div>
+            <h3>{post.title}</h3>
+            <p>{post.excerpt}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <script is:inline>
+    document.querySelectorAll(".why-card").forEach((card) => {
+      card.addEventListener("click", () => {
+        document.querySelectorAll(".why-card.is-active").forEach((active) => {
+          if (active !== card) active.classList.remove("is-active");
+        });
+        card.classList.toggle("is-active");
+      });
+    });
+  </script>
+</BaseLayout>

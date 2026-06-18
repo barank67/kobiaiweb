@@ -1,0 +1,77 @@
+---
+import { navItems, socials } from "../data/site";
+import "../styles/global.css";
+
+const {
+  title = "Kobi AI",
+  description = "Şirketler için agentic AI, yapay zeka ajanları ve iş süreci otomasyonu çözümleri."
+} = Astro.props;
+---
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" href="/favicon.png" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Kobi AI ana sayfa">
+        <span class="brand-mark">K</span>
+        <span>Kobi AI</span>
+      </a>
+      <nav class="main-nav" aria-label="Ana menü">
+        {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+      <a class="header-cta" href="#iletisim">Demo Planla</a>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer" id="iletisim">
+      <div>
+        <a class="brand footer-brand" href="/">
+          <span class="brand-mark">K</span>
+          <span>Kobi AI</span>
+        </a>
+        <p>Yapay zeka ajanlarıyla KOBİ operasyonlarını daha hızlı, ölçülebilir ve verimli hale getiren çözüm ortağı.</p>
+      </div>
+      <div>
+        <h2>İletişim</h2>
+        <a href="mailto:info@kobiai.com.tr">info@kobiai.com.tr</a>
+        <a href="tel:+905333346246">+90 533 334 62 46</a>
+      </div>
+      <div>
+        <h2>Sosyal Medya</h2>
+        <div class="social-links">
+          {socials.map((item) => <a href={item.href} target="_blank" rel="noreferrer">{item.label}</a>)}
+        </div>
+      </div>
+    </footer>
+    <button class="chatbot-toggle" type="button" aria-label="Chatbot'u aç">AI</button>
+    <section class="chatbot-panel" aria-live="polite" hidden>
+      <div class="chatbot-head">
+        <strong>Kobi AI Asistan</strong>
+        <button type="button" aria-label="Chatbot'u kapat">×</button>
+      </div>
+      <div class="chatbot-body">
+        <p>Merhaba, yapay zeka ajanları hakkında nasıl yardımcı olabilirim?</p>
+        <button type="button">Demo talebi oluştur</button>
+        <button type="button">Çözüm önerisi al</button>
+      </div>
+    </section>
+    <script is:inline>
+      const toggle = document.querySelector(".chatbot-toggle");
+      const panel = document.querySelector(".chatbot-panel");
+      const close = document.querySelector(".chatbot-head button");
+      toggle?.addEventListener("click", () => {
+        panel.hidden = !panel.hidden;
+      });
+      close?.addEventListener("click", () => {
+        panel.hidden = true;
+      });
+    </script>
+  </body>
+</html>

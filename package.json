@@ -1,0 +1,16 @@
+{
+  "name": "kobiaiweb",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host 0.0.0.0",
+    "build": "astro build",
+    "preview": "astro preview --host 0.0.0.0"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.5.1",
+    "astro": "^5.10.1"
+  },
+  "devDependencies": {}
+}
