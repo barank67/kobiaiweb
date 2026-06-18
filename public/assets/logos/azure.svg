@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="48" viewBox="0 0 150 48" role="img" aria-label="Azure">
+  <path d="M27 8 11 38h14l21-30H27z" fill="#0078d4"/>
+  <path d="M31 24 22 38h26L35 17z" fill="#50a7ea"/>
+  <text x="60" y="30" fill="#111827" font-family="Arial, sans-serif" font-size="18" font-weight="800">Azure</text>
+</svg>

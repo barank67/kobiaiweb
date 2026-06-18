@@ -25,7 +25,11 @@ import { agents, posts, solutions, techLogos, whyItems } from "../data/site";
 
   <section class="logo-strip" aria-label="Teknoloji logoları">
     <div class="logo-track">
-      {[...techLogos, ...techLogos].map((logo) => <span>{logo}</span>)}
+      {[...techLogos, ...techLogos].map((logo) => (
+        <span>
+          <img src={logo.src} alt={logo.name} loading="eager" />
+        </span>
+      ))}
     </div>
   </section>
 

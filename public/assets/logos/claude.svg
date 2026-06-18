@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="48" viewBox="0 0 150 48" role="img" aria-label="Claude">
+  <circle cx="25" cy="24" r="16" fill="#d97757"/>
+  <path d="M18 29 25 12l7 17M21 24h8" fill="none" stroke="#fff7ed" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="56" y="30" fill="#111827" font-family="Arial, sans-serif" font-size="18" font-weight="800">Claude</text>
+</svg>

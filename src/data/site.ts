@@ -24,14 +24,14 @@ export const agents = [
 ];
 
 export const techLogos = [
-  "Anaconda",
-  "Google Cloud",
-  "Python",
-  "Azure",
-  "AWS",
-  "ChatGPT",
-  "Gemini",
-  "Claude"
+  { name: "Anaconda", src: "/assets/logos/anaconda.svg" },
+  { name: "Google Cloud", src: "/assets/logos/google-cloud.svg" },
+  { name: "Python", src: "/assets/logos/python.svg" },
+  { name: "Azure", src: "/assets/logos/azure.svg" },
+  { name: "AWS", src: "/assets/logos/aws.svg" },
+  { name: "ChatGPT", src: "/assets/logos/chatgpt.svg" },
+  { name: "Gemini", src: "/assets/logos/gemini.svg" },
+  { name: "Claude", src: "/assets/logos/claude.svg" }
 ];
 
 export const solutions = [
