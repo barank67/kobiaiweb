@@ -62,7 +62,7 @@ const imageUrl = new URL(image, Astro.site ?? Astro.url.origin).toString();
       <div class="contact-copy">
         <p class="eyebrow">Demo Planla</p>
         <h2>Ekibiniz için doğru yapay zeka ajanlarını birlikte belirleyelim</h2>
-        <p>Formu doldurduğunuzda bilgileriniz e-posta taslağı olarak hazırlanır. Statik GitHub Pages yayını kullandığımız için ayrı bir form servisi bağlanmadan sunucuya kayıt yapılmaz.</p>
+        <p>Formu doldurduktan sonra Gmail, Yahoo veya varsayılan mail uygulamanızla gönderim yapabilirsiniz. Kalıcı form kaydı için ayrıca bir form servisi ya da backend endpointi bağlanmalıdır.</p>
       </div>
       <form class="contact-form" id="demo-form">
         <label>
@@ -145,6 +145,16 @@ const imageUrl = new URL(image, Astro.site ?? Astro.url.origin).toString();
         const chatInput = document.querySelector(".chatbot-form input");
         const demoForm = document.querySelector("#demo-form");
         const formStatus = document.querySelector(".form-status");
+        const chatbotEndpoint = "https://chatbot-858666494590.europe-west1.run.app/chat";
+        const getSessionId = () => {
+          const key = "kobiai_chat_session_id";
+          const existing = window.localStorage.getItem(key);
+          if (existing) return existing;
+          const id = crypto.randomUUID ? crypto.randomUUID() : `kobiai-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+          window.localStorage.setItem(key, id);
+          return id;
+        };
+        const sessionId = getSessionId();
         const setOpen = (open) => {
           panel?.classList.toggle("is-open", open);
           panel?.setAttribute("aria-hidden", open ? "false" : "true");
@@ -157,18 +167,29 @@ const imageUrl = new URL(image, Astro.site ?? Astro.url.origin).toString();
           item.textContent = text;
           messages?.appendChild(item);
           messages?.scrollTo({ top: messages.scrollHeight, behavior: "smooth" });
+          return item;
         };
-        const replyTo = (text) => {
-          const lower = text.toLocaleLowerCase("tr-TR");
-          if (lower.includes("demo") || lower.includes("görüş")) {
-            addMessage("Demo talebi için form bölümüne yönlendirebilirim. Ad, telefon ve e-posta alanlarını doldurmanız yeterli.");
-            return;
+        const parseBotReply = async (response) => {
+          const contentType = response.headers.get("content-type") || "";
+          if (contentType.includes("application/json")) {
+            const data = await response.json();
+            return data.reply || data.answer || data.message || data.response || "Yanıt alındı.";
           }
-          if (lower.includes("satın") || lower.includes("finans") || lower.includes("üretim") || lower.includes("teklif")) {
-            addMessage("Bu süreç için uygun ajanı belirlemek adına mevcut veri kaynaklarınızı ve tekrar eden karar noktalarını birlikte inceleyebiliriz.");
-            return;
+          return response.text();
+        };
+        const replyTo = async (text) => {
+          const loading = addMessage("Yanıt hazırlanıyor...");
+          try {
+            const response = await fetch(chatbotEndpoint, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ message: text, session_id: sessionId })
+            });
+            const reply = await parseBotReply(response);
+            loading.textContent = response.ok ? reply : `Chatbot yanıt veremedi: ${reply}`;
+          } catch (error) {
+            loading.textContent = "Chatbot servisine şu anda ulaşılamıyor. Lütfen biraz sonra tekrar deneyin.";
           }
-          addMessage("Mesajınızı aldım. Daha detaylı dönüş için Demo Planla formunu doldurabilir veya info@kobiai.com.tr adresine yazabilirsiniz.");
         };
         toggle?.addEventListener("click", () => {
           setOpen(!panel?.classList.contains("is-open"));
@@ -202,8 +223,16 @@ const imageUrl = new URL(image, Astro.site ?? Astro.url.origin).toString();
             "",
             `Mesaj: ${data.get("message") || "-"}`
           ].join("\n");
-          window.location.href = `mailto:info@kobiai.com.tr?subject=${encodeURIComponent("Kobi AI Demo Talebi")}&body=${encodeURIComponent(body)}`;
-          formStatus.textContent = "E-posta taslağı hazırlandı. Gönderimi e-posta uygulamanızdan tamamlayabilirsiniz.";
+          const subject = "Kobi AI Demo Talebi";
+          const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=info@kobiai.com.tr&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          const yahooUrl = `https://compose.mail.yahoo.com/?to=info@kobiai.com.tr&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          const mailtoUrl = `mailto:info@kobiai.com.tr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          formStatus.innerHTML = `
+            <span>Gönderim için tercih ettiğiniz servisi açın:</span>
+            <a href="${gmailUrl}" target="_blank" rel="noreferrer">Gmail</a>
+            <a href="${yahooUrl}" target="_blank" rel="noreferrer">Yahoo</a>
+            <a href="${mailtoUrl}">Mail uygulaması</a>
+          `;
         });
         document.addEventListener("keydown", (event) => {
           if (event.key === "Escape") setOpen(false);

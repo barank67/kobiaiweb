@@ -739,6 +739,27 @@ img {
   font-size: 14px;
 }
 
+.form-status span {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.form-status a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  margin: 0 8px 8px 0;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--text);
+  font-weight: 800;
+}
+
+.form-status a:hover {
+  border-color: rgba(224, 24, 45, 0.72);
+}
+
 .site-footer h2 {
   margin: 0 0 14px;
   font-size: 16px;
