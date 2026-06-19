@@ -40,7 +40,18 @@ const imageUrl = new URL(image, Astro.site ?? Astro.url.origin).toString();
         <img class="brand-logo" src="/assets/images/kobiai-logo-white.png" alt="Kobi AI" />
       </a>
       <nav class="main-nav" aria-label="Ana menü">
-        {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+        {navItems.map((item) => (
+          item.children ? (
+            <div class="nav-item">
+              <a href={item.href} aria-haspopup="true">{item.label}</a>
+              <div class="nav-menu">
+                {item.children.map((child) => <a href={child.href}>{child.label}</a>)}
+              </div>
+            </div>
+          ) : (
+            <a href={item.href}>{item.label}</a>
+          )
+        ))}
       </nav>
       <a class="header-cta" href="#iletisim">Demo Planla</a>
     </header>

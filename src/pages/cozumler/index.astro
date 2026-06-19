@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { solutionPages } from "../../data/site";
+---
+<BaseLayout
+  title="Çözümlerimiz | Kobi AI"
+  description="Kobi AI yapay zeka ajanları, satın alma, karlılık, üretim planlama, iş akışı ve yapay zeka danışmanlığı çözümleri."
+>
+  <section class="page-hero">
+    <div class="reveal-box">
+      <p>Çözümlerimiz</p>
+      <h1>İş süreçleri için yapay zeka ajanları</h1>
+    </div>
+  </section>
+  <section class="section">
+    <div class="section-head">
+      <p class="eyebrow">Departmanlara göre</p>
+      <h2>Kobi AI çözüm alanları</h2>
+    </div>
+    <div class="solution-grid">
+      {solutionPages.map((item) => (
+        <a class="solution-card solution-link" href={`/cozumler/${item.slug}/`}>
+          <span></span>
+          <h2>{item.title}</h2>
+          <p>{item.text}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

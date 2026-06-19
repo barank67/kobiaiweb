@@ -79,8 +79,50 @@ img {
   font-size: 14px;
 }
 
-.main-nav a:hover {
+.main-nav a:hover,
+.nav-item:focus-within > a {
   color: var(--white);
+}
+
+.nav-item {
+  position: relative;
+  padding: 10px 0;
+}
+
+.nav-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  z-index: 30;
+  display: grid;
+  width: 280px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(8, 9, 11, 0.96);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 8px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.nav-menu a {
+  padding: 11px 12px;
+  border-radius: 6px;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.nav-menu a:hover {
+  background: rgba(224, 24, 45, 0.16);
+}
+
+.nav-item:hover .nav-menu,
+.nav-item:focus-within .nav-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
 }
 
 .header-cta,
@@ -338,6 +380,7 @@ img {
   background: var(--red);
 }
 
+.solution-card h2,
 .solution-card h3 {
   margin: 0 0 14px;
   font-size: 21px;
@@ -360,6 +403,14 @@ img {
 
 .solution-card:hover p {
   color: rgba(255, 255, 255, 0.86);
+}
+
+.solution-link {
+  display: block;
+}
+
+.section-actions {
+  margin-top: 28px;
 }
 
 .dark-section {
@@ -537,6 +588,55 @@ img {
   font-weight: 700;
 }
 
+.solution-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+  gap: 42px;
+  align-items: start;
+}
+
+.solution-detail-copy h2 {
+  margin: 0 0 20px;
+  font-size: clamp(30px, 4vw, 52px);
+  line-height: 1.08;
+}
+
+.solution-detail-copy p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.solution-benefits {
+  display: grid;
+  gap: 14px;
+}
+
+.solution-benefits article {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: start;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.solution-benefits span {
+  width: 12px;
+  height: 12px;
+  margin-top: 8px;
+  border-radius: 50%;
+  background: var(--red);
+}
+
+.solution-benefits p {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.6;
+}
+
 .site-footer {
   display: grid;
   grid-template-columns: 1.3fr 0.8fr 0.9fr;
@@ -685,7 +785,8 @@ img {
   .solution-grid,
   .why-grid,
   .blog-grid,
-  .site-footer {
+  .site-footer,
+  .solution-detail {
     grid-template-columns: 1fr;
   }
 }

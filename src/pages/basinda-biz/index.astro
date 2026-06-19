@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { allPressPosts, fallbackPressImage, pressPerPage } from "../../data/press";
+
+const pagePosts = allPressPosts.slice(0, pressPerPage);
+const totalPages = Math.ceil(allPressPosts.length / pressPerPage);
+---
+<BaseLayout
+  title="Basında Biz | Kobi AI"
+  description="Kobi AI hakkında basında çıkan haberler, duyurular ve yayınlar."
+>
+  <section class="page-hero">
+    <div class="reveal-box">
+      <p>Basında Biz</p>
+      <h1>Kobi AI haberleri ve yayınları</h1>
+    </div>
+  </section>
+  <section class="section blog-listing">
+    <div class="blog-grid">
+      {pagePosts.map((post) => (
+        <a class="blog-card lift-card" href={`/basinda-biz/${post.slug}/`}>
+          <figure>
+            <img src={post.image || fallbackPressImage} alt={post.title} loading="eager" />
+          </figure>
+          <div>
+            <h2>{post.title}</h2>
+            <p>{post.excerpt}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+    <nav class="pagination" aria-label="Basında Biz sayfaları">
+      <span class="is-current">1</span>
+      {Array.from({ length: totalPages - 1 }, (_, index) => (
+        <a href={`/basinda-biz/page/${index + 2}/`}>{index + 2}</a>
+      ))}
+    </nav>
+  </section>
+</BaseLayout>
