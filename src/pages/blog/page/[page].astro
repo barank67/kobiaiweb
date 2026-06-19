@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { allBlogPosts, fallbackBlogImage, postsPerPage } from "../../../data/blog";
+
+export function getStaticPaths() {
+  const totalPages = Math.ceil(allBlogPosts.length / postsPerPage);
+  return Array.from({ length: Math.max(0, totalPages - 1) }, (_, index) => {
+    const page = index + 2;
+    return { params: { page: String(page) }, props: { page } };
+  });
+}
+
+const { page } = Astro.props;
+const totalPages = Math.ceil(allBlogPosts.length / postsPerPage);
+const pagePosts = allBlogPosts.slice((page - 1) * postsPerPage, page * postsPerPage);
+---
+<BaseLayout title={`Blog Sayfa ${page} | Kobi AI`} description="Kobi AI blog yazıları, yapay zeka ajanları, satın alma optimizasyonu ve KOBİ dijital dönüşümü içerikleri.">
+  <section class="page-hero">
+    <div class="reveal-box">
+      <p>Blog</p>
+      <h1>Yapay zeka ajanları ve KOBİ dönüşümü</h1>
+    </div>
+  </section>
+  <section class="section blog-listing">
+    <div class="blog-grid">
+      {pagePosts.map((post) => (
+        <a class="blog-card lift-card" href={`/blog/${post.slug}/`}>
+          <figure>
+            <img src={post.image || fallbackBlogImage} alt={post.title} loading="eager" />
+          </figure>
+          <div>
+            <h2>{post.title}</h2>
+            <p>{post.excerpt}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+    <nav class="pagination" aria-label="Blog sayfaları">
+      <a href="/blog/">1</a>
+      {Array.from({ length: totalPages - 1 }, (_, index) => {
+        const pageNumber = index + 2;
+        return pageNumber === page
+          ? <span class="is-current">{pageNumber}</span>
+          : <a href={`/blog/page/${pageNumber}/`}>{pageNumber}</a>;
+      })}
+    </nav>
+  </section>
+</BaseLayout>

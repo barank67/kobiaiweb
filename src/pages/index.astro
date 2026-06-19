@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { agents, posts, solutions, techLogos, whyItems } from "../data/site";
+import { agents, solutions, techLogos, whyItems } from "../data/site";
+import { fallbackBlogImage, homeBlogPosts } from "../data/blog";
 ---
 <BaseLayout title="Kobi AI | Şirketler İçin Yapay Zeka Ajanları">
   <section class="hero">
@@ -94,10 +95,10 @@ import { agents, posts, solutions, techLogos, whyItems } from "../data/site";
       <h2>Yapay zeka ajanlarıyla ilgili içgörüler</h2>
     </div>
     <div class="blog-grid">
-      {posts.map((post) => (
-        <a class="blog-card" href={post.href}>
+      {homeBlogPosts.map((post) => (
+        <a class="blog-card" href={`/blog/${post.slug}/`}>
           <figure>
-            <img src={post.image} alt={post.title} loading="eager" />
+            <img src={post.image || fallbackBlogImage} alt={post.title} loading="eager" />
           </figure>
           <div>
             <h3>{post.title}</h3>

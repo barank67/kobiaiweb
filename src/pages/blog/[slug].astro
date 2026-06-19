@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { allBlogPosts, fallbackBlogImage } from "../../data/blog";
+
+export function getStaticPaths() {
+  return allBlogPosts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const image = post.image || fallbackBlogImage;
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.title,
+  description: post.seoDescription || post.excerpt,
+  image: new URL(image, Astro.site ?? Astro.url.origin).toString(),
+  datePublished: post.date,
+  dateModified: post.date,
+  author: { "@type": "Organization", name: "Kobi AI" },
+  publisher: { "@type": "Organization", name: "Kobi AI" },
+  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString()
+};
+---
+<BaseLayout
+  title={`${post.seoTitle || post.title} | Kobi AI`}
+  description={post.seoDescription || post.excerpt}
+  image={image}
+  type="article"
+  publishedTime={post.date}
+>
+  <section class="page-hero blog-detail-hero">
+    <div class="reveal-box">
+      <p>{post.date}</p>
+      <h1>{post.title}</h1>
+    </div>
+  </section>
+  <article class="article blog-article">
+    <figure>
+      <img src={image} alt={post.title} loading="eager" />
+    </figure>
+    <p class="article-lead">{post.excerpt}</p>
+    {post.content.split(/\n+/).filter(Boolean).map((paragraph) => <p>{paragraph}</p>)}
+  </article>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</BaseLayout>
