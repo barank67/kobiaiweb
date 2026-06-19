@@ -1,4 +1,8 @@
-export const solutionPages = [
+import solutionsGenerated from "./solutions.generated.json";
+
+const solutionContentBySlug = new Map(solutionsGenerated.map((solution) => [solution.slug, solution]));
+
+const baseSolutionPages = [
   {
     title: "Yapay Zeka ile Satın Alma",
     slug: "yapay-zeka-ile-satin-alma",
@@ -56,6 +60,11 @@ export const solutionPages = [
     benefits: ["Teklif hazırlama süresini kısaltır", "Standart dışı teklif riskini azaltır", "Satış takibini daha görünür hale getirir"]
   }
 ];
+
+export const solutionPages = baseSolutionPages.map((solution) => ({
+  ...solution,
+  ...solutionContentBySlug.get(solution.slug)
+}));
 
 export const navItems = [
   { label: "Ana Sayfa", href: "/" },

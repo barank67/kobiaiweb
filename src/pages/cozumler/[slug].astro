@@ -26,21 +26,30 @@ const jsonLd = {
       <h1>{solution.title}</h1>
     </div>
   </section>
-  <section class="section solution-detail">
-    <div class="solution-detail-copy">
-      <p class="eyebrow">Agentic AI çözümü</p>
-      <h2>{solution.text}</h2>
-      <p>{solution.detail}</p>
-      <a class="button primary" href="/#iletisim">Demo Planla</a>
-    </div>
-    <div class="solution-benefits">
-      {solution.benefits.map((benefit) => (
-        <article>
-          <span></span>
-          <p>{benefit}</p>
-        </article>
-      ))}
-    </div>
-  </section>
+  {solution.contentHtml ? (
+    <section class="section">
+      <article class="solution-content" set:html={solution.contentHtml} />
+      <div class="solution-cta">
+        <a class="button primary" href="/#iletisim">Demo Planla</a>
+      </div>
+    </section>
+  ) : (
+    <section class="section solution-detail">
+      <div class="solution-detail-copy">
+        <p class="eyebrow">Agentic AI çözümü</p>
+        <h2>{solution.text}</h2>
+        <p>{solution.detail}</p>
+        <a class="button primary" href="/#iletisim">Demo Planla</a>
+      </div>
+      <div class="solution-benefits">
+        {solution.benefits.map((benefit) => (
+          <article>
+            <span></span>
+            <p>{benefit}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 </BaseLayout>

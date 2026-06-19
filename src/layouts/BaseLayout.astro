@@ -13,6 +13,7 @@ const {
 
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString();
 const imageUrl = new URL(image, Astro.site ?? Astro.url.origin).toString();
+const isStaging = new URL(Astro.site ?? Astro.url.origin).hostname === "test.perda.com.tr";
 ---
 <!doctype html>
 <html lang="tr">
@@ -20,6 +21,7 @@ const imageUrl = new URL(image, Astro.site ?? Astro.url.origin).toString();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    {isStaging && <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />}
     <link rel="canonical" href={canonicalUrl} />
     <meta property="og:type" content={type} />
     <meta property="og:title" content={title} />
