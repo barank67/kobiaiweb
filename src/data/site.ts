@@ -58,18 +58,32 @@ export const solutionPages = [
 ];
 
 export const navItems = [
-  { label: "Çözümlerimiz", href: "/cozumler/", children: solutionPages.map(({ title, slug }) => ({ label: title, href: `/cozumler/${slug}/` })) },
+  {
+    label: "Kurumsal",
+    href: "/hakkimizda/",
+    children: [
+      { label: "Hakkımızda", href: "/hakkimizda/" },
+      { label: "Basında Biz", href: "/basinda-biz/" },
+      { label: "İş Ortaklarımız", href: "/is-ortaklarimiz/" },
+      { label: "Bize Ulaşın", href: "/#iletisim" },
+      { label: "Gizlilik Politikası", href: "/gizlilik-politikasi/" }
+    ]
+  },
+  {
+    label: "Çözümlerimiz",
+    href: "/cozumler/",
+    children: solutionPages.map(({ title, slug }) => ({ label: title, href: `/cozumler/${slug}/` }))
+  },
   { label: "Neden Kobi AI?", href: "/#neden" },
-  { label: "Basında Biz", href: "/basinda-biz/" },
   { label: "Blog", href: "/blog/" },
   { label: "İletişim", href: "/#iletisim" }
 ];
 
 export const socials = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/kobiai/" },
-  { label: "Instagram", href: "https://www.instagram.com/kobiai.ltd/" },
-  { label: "YouTube", href: "https://www.youtube.com/@Kobiai-ltd" },
-  { label: "Facebook", href: "https://www.facebook.com/people/Kobiai/61582619828142/" }
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/kobiai/", icon: "/assets/social/linkedin.svg" },
+  { label: "Instagram", href: "https://www.instagram.com/kobiai.ltd/", icon: "/assets/social/instagram.svg" },
+  { label: "YouTube", href: "https://www.youtube.com/@Kobiai-ltd", icon: "/assets/social/youtube.svg" },
+  { label: "Facebook", href: "https://www.facebook.com/people/Kobiai/61582619828142/", icon: "/assets/social/facebook.svg" }
 ];
 
 export const agents = [

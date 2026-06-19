@@ -53,12 +53,43 @@ const imageUrl = new URL(image, Astro.site ?? Astro.url.origin).toString();
           )
         ))}
       </nav>
-      <a class="header-cta" href="#iletisim">Demo Planla</a>
+      <a class="header-cta" href="/#iletisim">Demo Planla</a>
     </header>
     <main>
       <slot />
     </main>
-    <footer class="site-footer" id="iletisim">
+    <section class="contact-section" id="iletisim">
+      <div class="contact-copy">
+        <p class="eyebrow">Demo Planla</p>
+        <h2>Ekibiniz için doğru yapay zeka ajanlarını birlikte belirleyelim</h2>
+        <p>Formu doldurduğunuzda bilgileriniz e-posta taslağı olarak hazırlanır. Statik GitHub Pages yayını kullandığımız için ayrı bir form servisi bağlanmadan sunucuya kayıt yapılmaz.</p>
+      </div>
+      <form class="contact-form" id="demo-form">
+        <label>
+          <span>Ad Soyad *</span>
+          <input name="name" type="text" autocomplete="name" required />
+        </label>
+        <label>
+          <span>Firma</span>
+          <input name="company" type="text" autocomplete="organization" />
+        </label>
+        <label>
+          <span>Telefon *</span>
+          <input name="phone" type="tel" autocomplete="tel" required />
+        </label>
+        <label>
+          <span>Email *</span>
+          <input name="email" type="email" autocomplete="email" required />
+        </label>
+        <label class="full-field">
+          <span>Mesajınız</span>
+          <textarea name="message" rows="5"></textarea>
+        </label>
+        <button class="button primary" type="submit">Demo Talebi Gönder</button>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+    <footer class="site-footer">
       <div>
         <a class="brand footer-brand" href="/">
           <img class="brand-logo" src="/assets/images/kobiai-logo-white.png" alt="Kobi AI" />
@@ -73,7 +104,12 @@ const imageUrl = new URL(image, Astro.site ?? Astro.url.origin).toString();
       <div>
         <h2>Sosyal Medya</h2>
         <div class="social-links">
-          {socials.map((item) => <a href={item.href} target="_blank" rel="noreferrer">{item.label}</a>)}
+          {socials.map((item) => (
+            <a href={item.href} target="_blank" rel="noreferrer" aria-label={item.label}>
+              <img src={item.icon} alt="" />
+              <span>{item.label}</span>
+            </a>
+          ))}
         </div>
       </div>
     </footer>
@@ -86,9 +122,17 @@ const imageUrl = new URL(image, Astro.site ?? Astro.url.origin).toString();
         <button type="button" aria-label="Chatbot'u kapat">×</button>
       </div>
       <div class="chatbot-body">
-        <p>Merhaba, yapay zeka ajanları hakkında nasıl yardımcı olabilirim?</p>
-        <button type="button">Demo talebi oluştur</button>
-        <button type="button">Çözüm önerisi al</button>
+        <div class="chatbot-messages">
+          <p class="bot-message">Merhaba, yapay zeka ajanları hakkında nasıl yardımcı olabilirim?</p>
+        </div>
+        <div class="chatbot-actions">
+          <button type="button" data-chat-prompt="Demo planlamak istiyorum.">Demo talebi oluştur</button>
+          <button type="button" data-chat-prompt="Şirketim için çözüm önerisi almak istiyorum.">Çözüm önerisi al</button>
+        </div>
+        <form class="chatbot-form">
+          <input type="text" name="chat-message" autocomplete="off" placeholder="Mesajınızı yazın" aria-label="Chatbot mesajı" />
+          <button type="submit">Gönder</button>
+        </form>
       </div>
     </section>
     <script is:inline>
@@ -96,15 +140,71 @@ const imageUrl = new URL(image, Astro.site ?? Astro.url.origin).toString();
         const toggle = document.querySelector(".chatbot-toggle");
         const panel = document.querySelector(".chatbot-panel");
         const close = document.querySelector(".chatbot-head button");
+        const messages = document.querySelector(".chatbot-messages");
+        const chatForm = document.querySelector(".chatbot-form");
+        const chatInput = document.querySelector(".chatbot-form input");
+        const demoForm = document.querySelector("#demo-form");
+        const formStatus = document.querySelector(".form-status");
         const setOpen = (open) => {
           panel?.classList.toggle("is-open", open);
           panel?.setAttribute("aria-hidden", open ? "false" : "true");
           toggle?.setAttribute("aria-expanded", open ? "true" : "false");
+          if (open) window.setTimeout(() => chatInput?.focus(), 120);
+        };
+        const addMessage = (text, type = "bot") => {
+          const item = document.createElement("p");
+          item.className = type === "user" ? "user-message" : "bot-message";
+          item.textContent = text;
+          messages?.appendChild(item);
+          messages?.scrollTo({ top: messages.scrollHeight, behavior: "smooth" });
+        };
+        const replyTo = (text) => {
+          const lower = text.toLocaleLowerCase("tr-TR");
+          if (lower.includes("demo") || lower.includes("görüş")) {
+            addMessage("Demo talebi için form bölümüne yönlendirebilirim. Ad, telefon ve e-posta alanlarını doldurmanız yeterli.");
+            return;
+          }
+          if (lower.includes("satın") || lower.includes("finans") || lower.includes("üretim") || lower.includes("teklif")) {
+            addMessage("Bu süreç için uygun ajanı belirlemek adına mevcut veri kaynaklarınızı ve tekrar eden karar noktalarını birlikte inceleyebiliriz.");
+            return;
+          }
+          addMessage("Mesajınızı aldım. Daha detaylı dönüş için Demo Planla formunu doldurabilir veya info@kobiai.com.tr adresine yazabilirsiniz.");
         };
         toggle?.addEventListener("click", () => {
           setOpen(!panel?.classList.contains("is-open"));
         });
         close?.addEventListener("click", () => setOpen(false));
+        document.querySelectorAll("[data-chat-prompt]").forEach((button) => {
+          button.addEventListener("click", () => {
+            const text = button.getAttribute("data-chat-prompt") || "";
+            addMessage(text, "user");
+            replyTo(text);
+            if (text.includes("Demo")) document.querySelector("#iletisim")?.scrollIntoView({ behavior: "smooth" });
+          });
+        });
+        chatForm?.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const text = chatInput?.value.trim();
+          if (!text) return;
+          addMessage(text, "user");
+          chatInput.value = "";
+          replyTo(text);
+        });
+        demoForm?.addEventListener("submit", (event) => {
+          event.preventDefault();
+          if (!demoForm.reportValidity()) return;
+          const data = new FormData(demoForm);
+          const body = [
+            `Ad Soyad: ${data.get("name")}`,
+            `Firma: ${data.get("company") || "-"}`,
+            `Telefon: ${data.get("phone")}`,
+            `Email: ${data.get("email")}`,
+            "",
+            `Mesaj: ${data.get("message") || "-"}`
+          ].join("\n");
+          window.location.href = `mailto:info@kobiai.com.tr?subject=${encodeURIComponent("Kobi AI Demo Talebi")}&body=${encodeURIComponent(body)}`;
+          formStatus.textContent = "E-posta taslağı hazırlandı. Gönderimi e-posta uygulamanızdan tamamlayabilirsiniz.";
+        });
         document.addEventListener("keydown", (event) => {
           if (event.key === "Escape") setOpen(false);
         });
