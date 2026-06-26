@@ -15,7 +15,7 @@ const totalPages = Math.ceil(allBlogPosts.length / postsPerPage);
 const pagePosts = allBlogPosts.slice((page - 1) * postsPerPage, page * postsPerPage);
 ---
 <BaseLayout title={`Blog Sayfa ${page} | Kobi AI`} description="Kobi AI blog yazıları, yapay zeka ajanları, satın alma optimizasyonu ve KOBİ dijital dönüşümü içerikleri.">
-  <section class="page-hero">
+  <section class="page-hero light-page-hero">
     <div class="reveal-box">
       <p>Blog</p>
       <h1>Yapay zeka ajanları ve KOBİ dönüşümü</h1>

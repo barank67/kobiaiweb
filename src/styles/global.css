@@ -285,7 +285,6 @@ img {
 }
 
 .home-intro,
-.why-intro,
 .solution-panel,
 .why-feature,
 .discovery-section,
@@ -295,8 +294,7 @@ img {
   background: var(--white);
 }
 
-.home-intro,
-.why-intro {
+.home-intro {
   padding: 76px 16px;
 }
 
@@ -417,7 +415,7 @@ img {
   gap: 48px;
   align-items: center;
   width: 100%;
-  padding: 0 max(16px, calc((100% - 1180px) / 2)) 92px;
+  padding: 86px max(16px, calc((100% - 1180px) / 2)) 92px;
 }
 
 .why-feature figure {
@@ -432,6 +430,25 @@ img {
   max-height: 620px;
   object-fit: cover;
   object-position: center;
+}
+
+.why-content {
+  display: grid;
+  gap: 26px;
+}
+
+.why-copy h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: 46px;
+  line-height: 1.08;
+}
+
+.why-copy p {
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.72;
 }
 
 .why-stack {
@@ -575,10 +592,13 @@ img {
 .testimonial-slider {
   position: relative;
   min-height: 430px;
+  overflow: hidden;
 }
 
 .testimonial-card {
-  display: none;
+  position: absolute;
+  inset: 0;
+  display: grid;
   grid-template-columns: minmax(0, 1fr) 220px;
   gap: 36px;
   align-items: center;
@@ -588,10 +608,24 @@ img {
   border-radius: 8px;
   background: var(--white);
   box-shadow: var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(28px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
 }
 
 .testimonial-card.is-active {
-  display: grid;
+  position: relative;
+  z-index: 2;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
+.testimonial-card.is-leaving {
+  z-index: 1;
+  opacity: 0;
+  transform: translateX(-28px);
 }
 
 .testimonial-card > img {
@@ -724,6 +758,11 @@ img {
   color: var(--white);
 }
 
+.light-page-hero {
+  background: var(--white);
+  color: var(--text);
+}
+
 .reveal-box {
   width: min(980px, 100%);
   margin: 0 auto;
@@ -754,6 +793,22 @@ img {
   font-size: 54px;
   line-height: 1.04;
   letter-spacing: 0;
+}
+
+.light-page-hero .reveal-box {
+  border-color: var(--line);
+  background: var(--white);
+  color: var(--text);
+  box-shadow: none;
+}
+
+.light-page-hero .reveal-box h1,
+.light-page-hero .reveal-box h2 {
+  color: var(--text);
+}
+
+.light-page-hero .reveal-box p {
+  color: var(--red);
 }
 
 @keyframes revealUp {
@@ -1320,12 +1375,14 @@ img {
 
   .hero-copy p:not(.eyebrow),
   .narrow-copy p,
+  .why-copy p,
   .testimonial-copy p,
   .question-column p {
     font-size: 16px;
   }
 
   .narrow-copy h2,
+  .why-copy h2,
   .focus-band h2,
   .section-head h2,
   .reveal-box h1,

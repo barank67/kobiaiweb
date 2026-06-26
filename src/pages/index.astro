@@ -60,19 +60,7 @@ const questionColumns = [yesQuestions.slice(0, 8), yesQuestions.slice(8)];
     </div>
   </section>
 
-  <section class="why-intro" id="neden">
-    <div class="narrow-copy">
-      <h2>Neden KOBİ AI?</h2>
-      <p>
-        Biz, Kobi Ai olarak, yapay zekayı sadece bir teknoloji olarak görmüyoruz; onu işletmenizin
-        kârlılığını ve verimliliğini artıran stratejik bir güce dönüştürüyoruz. Sizi rakiplerinizden
-        ayıracak ve pazarınızda lider yapacak bir ortak arıyorsanız, doğru yerdesiniz. Çünkü biz size
-        üç temel değer sunuyoruz:
-      </p>
-    </div>
-  </section>
-
-  <section class="why-feature">
+  <section class="why-feature" id="neden">
     <figure>
       <img
         src="/assets/wp/2025/11/ChatGPT-Image-24-Eki-2025-17_53_31-683x1024.avif"
@@ -80,13 +68,24 @@ const questionColumns = [yesQuestions.slice(0, 8), yesQuestions.slice(8)];
         loading="eager"
       />
     </figure>
-    <div class="why-stack">
-      {whyItems.map((item) => (
-        <button class="why-card" type="button">
-          <strong>{item.title}</strong>
-          <span>{item.text}</span>
-        </button>
-      ))}
+    <div class="why-content">
+      <div class="why-copy">
+        <h2>Neden KOBİ AI?</h2>
+        <p>
+          Biz, Kobi Ai olarak, yapay zekayı sadece bir teknoloji olarak görmüyoruz; onu işletmenizin
+          kârlılığını ve verimliliğini artıran stratejik bir güce dönüştürüyoruz. Sizi rakiplerinizden
+          ayıracak ve pazarınızda lider yapacak bir ortak arıyorsanız, doğru yerdesiniz. Çünkü biz size
+          üç temel değer sunuyoruz:
+        </p>
+      </div>
+      <div class="why-stack">
+        {whyItems.map((item) => (
+          <button class="why-card" type="button">
+            <strong>{item.title}</strong>
+            <span>{item.text}</span>
+          </button>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -180,16 +179,21 @@ const questionColumns = [yesQuestions.slice(0, 8), yesQuestions.slice(8)];
     const testimonialCards = Array.from(document.querySelectorAll(".testimonial-card"));
     let testimonialIndex = 0;
     const showTestimonial = (nextIndex) => {
+      const previousCard = testimonialCards[testimonialIndex];
       testimonialCards.forEach((card, index) => {
         const isActive = index === nextIndex;
         card.classList.toggle("is-active", isActive);
         card.setAttribute("aria-hidden", isActive ? "false" : "true");
       });
+      if (previousCard && previousCard !== testimonialCards[nextIndex]) {
+        previousCard.classList.add("is-leaving");
+        window.setTimeout(() => previousCard.classList.remove("is-leaving"), 650);
+      }
+      testimonialIndex = nextIndex;
     };
     if (testimonialCards.length > 1) {
       window.setInterval(() => {
-        testimonialIndex = (testimonialIndex + 1) % testimonialCards.length;
-        showTestimonial(testimonialIndex);
+        showTestimonial((testimonialIndex + 1) % testimonialCards.length);
       }, 7000);
     }
   </script>

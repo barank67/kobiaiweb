@@ -12,7 +12,16 @@ export type PressPost = {
   content: string;
 };
 
-export const allPressPosts = generatedPress as PressPost[];
+const pressPosts = generatedPress as PressPost[];
+
+const hasHurriyetTitle = (post: PressPost) => {
+  const searchableTitle = `${post.title} ${post.seoTitle}`.toLocaleLowerCase("tr-TR");
+  return searchableTitle.includes("hürriyet") || searchableTitle.includes("hurriyet");
+};
+
+export const allPressPosts = [...pressPosts].sort((a, b) => {
+  return Number(hasHurriyetTitle(b)) - Number(hasHurriyetTitle(a));
+});
 
 export const pressPerPage = 12;
 

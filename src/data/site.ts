@@ -68,7 +68,6 @@ export const navItems = [
     children: [
       { label: "Hakkımızda", href: "/hakkimizda/" },
       { label: "İş Ortaklarımız", href: "/is-ortaklarimiz/" },
-      { label: "Bize Ulaşın", href: "/#iletisim" },
       { label: "Gizlilik Politikası", href: "/gizlilik-politikasi/" }
     ]
   },
@@ -77,9 +76,8 @@ export const navItems = [
     href: "/cozumler/",
     children: solutionPages.map(({ title, href }) => ({ label: title, href }))
   },
-  { label: "Neden Kobi AI?", href: "/#neden" },
-  { label: "Basında Biz", href: "/basinda-biz/" },
   { label: "Blog", href: "/blog/" },
+  { label: "Basında Biz", href: "/basinda-biz/" },
   { label: "İletişim", href: "/#iletisim" }
 ];
 
