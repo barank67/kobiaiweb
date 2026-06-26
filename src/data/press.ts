@@ -13,6 +13,26 @@ export type PressPost = {
 };
 
 const pressPosts = generatedPress as PressPost[];
+const pinnedPressSlugs = ["isletmelere-cop-veri-uyarisi-yapay-zekada-veri-temizligi"];
+
+const comparePinnedPress = (a: PressPost, b: PressPost) => {
+  const aIndex = pinnedPressSlugs.indexOf(a.slug);
+  const bIndex = pinnedPressSlugs.indexOf(b.slug);
+
+  if (aIndex === bIndex) {
+    return 0;
+  }
+
+  if (aIndex === -1) {
+    return 1;
+  }
+
+  if (bIndex === -1) {
+    return -1;
+  }
+
+  return aIndex - bIndex;
+};
 
 const hasHurriyetTitle = (post: PressPost) => {
   const searchableTitle = `${post.title} ${post.seoTitle}`.toLocaleLowerCase("tr-TR");
@@ -20,6 +40,11 @@ const hasHurriyetTitle = (post: PressPost) => {
 };
 
 export const allPressPosts = [...pressPosts].sort((a, b) => {
+  const pinnedOrder = comparePinnedPress(a, b);
+  if (pinnedOrder !== 0) {
+    return pinnedOrder;
+  }
+
   return Number(hasHurriyetTitle(b)) - Number(hasHurriyetTitle(a));
 });
 

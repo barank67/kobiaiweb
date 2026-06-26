@@ -1,5 +1,28 @@
 [
   {
+    "id": 3002,
+    "title": "İŞLETMELERE ÇÖP VERİ UYARISI (Hürriyet Gazetesi 01.06.2026)",
+    "slug": "isletmelere-cop-veri-uyarisi-yapay-zekada-veri-temizligi",
+    "date": "2026-06-01",
+    "excerpt": "Şirketler yapay zekâ yatırımlarından neden verim alamıyor? Kobi AI Kurucusu Baran Kaya, hatalı veri yığınlarının ve \"çöp veri\" probleminin maliyetlerini anlatıyor.",
+    "image": "/assets/wp/2026/06/HURRIYET-GAZETESI-1-HAZIRAN.avif",
+    "seoTitle": "İŞLETMELERE ÇÖP VERİ UYARISI (Hürriyet Gazetesi 01.06.2026)",
+    "seoDescription": "Şirketler yapay zekâ yatırımlarından neden verim alamıyor? Kobi AI Kurucusu Baran Kaya, hatalı veri yığınlarının ve \"çöp veri\" probleminin maliyetlerini anlatıyor.",
+    "content": "2026’da yapay zekâ yatırımları orta ölçekli şirketlerin gündeminde ilk sıralara yerleşirken, şirketlerin büyük bölümü bekledikleri verimi alamıyor. Nedeni ise teknoloji eksikliği değil; yıllardır biriken dağınık, hatalı ve işlenmemiş veri yığınları. ERP sistemlerinde milyonlarca satır veri bulunmasına rağmen, yanlış ürün kayıtları, güncellenmeyen stok bilgileri, eksik tedarikçi verileri ve manuel giriş hataları şirketlerin operasyonlarını sessizce zayıflatıyor.\n\nKobi AI Kurucusu Baran Kaya, bugün birçok şirketin yapay zekâya geçmeye çalışırken aslında ‘çöp veri’ problemiyle mücadele ettiğini belirterek, “Şirketler yapay zekânın neden beklenen sonucu vermediğini sorguluyor ama asıl sorun çoğu zaman verinin kendisi oluyor. Yapay zekâ yanlış veriyi analiz ettiğinde, yanlış kararlar üretmeye başlıyor” dedi.\n\n“‘Çöp girdi, çöp çıktı’ dönemi şirketlere maliyet olarak geri dönüyor” diyen Kaya, “Bugün en büyük ihtiyaçlardan biri veri temizliği” vurgusu yaptı. Kaya’ya göre birçok işletme hızlı şekilde yapay zekâ kullanmak istiyor ancak sistemlerin sağlıklı çalışabilmesi için öncelikle mevcut verinin standartlaştırılması gerekiyor.",
+    "terms": [
+      {
+        "taxonomy": "category",
+        "name": "Basında Biz",
+        "slug": "basinda-biz"
+      },
+      {
+        "taxonomy": "category",
+        "name": "Öne Çıkan",
+        "slug": "one-cikan"
+      }
+    ]
+  },
+  {
     "id": 2899,
     "title": "KOBİ'lerde dijital dönüşüm (Türkgün Gazetesi 15.04.2026)",
     "slug": "kobiler-icin-yapay-zeka-destekli-is-surecleri-yonetimi",
