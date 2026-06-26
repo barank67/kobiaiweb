@@ -20,6 +20,14 @@ const baseSolutionPages = [
     benefits: ["Departmanlar arasında koordineli çalışan ajan ekipleri kurar", "7/24 takip ve aksiyon önerisi üretir", "Tekrarlı operasyon yükünü azaltır"]
   },
   {
+    title: "Yapay Zeka ile Teklif Asistanı",
+    slug: "agentic-ai-teklif-asistani",
+    text: "Müşteriye özel hesaplamalar, anlık koşullar ve karmaşık değişkenlerle teklif süreçlerinizi hızlandıran Agentic AI destekli teklif asistanı.",
+    detail:
+      "Kobi AI Teklif Asistanı, ERP, stok, fiyat, iskonto, nakliye, marj, termin ve finansal verileri birlikte değerlendirerek müşteriye özel teklifleri hızlı ve hatasız hazırlamanıza yardımcı olur.",
+    benefits: ["Teklif taleplerine anında dönüş sağlar", "Karmaşık teklif hesaplamalarında hata riskini azaltır", "Satış sonrası takip ve onay süreçlerini destekler"]
+  },
+  {
     title: "İşletmenize Özel Akıllı Asistan",
     slug: "akilli-asistan",
     sourceSlug: "yapay-zeka-asistani",
@@ -110,7 +118,18 @@ export const techLogos = [
   { name: "Claude", src: "/assets/logos/claude.svg" }
 ];
 
-export const solutions = solutionPages.map(({ title, slug, href, text }) => ({ title, slug, href, text }));
+const homeSolutionSlugs = new Set([
+  "yapay-zeka-ile-satin-alma",
+  "agentic-ai-otonom-yapay-zeka-ekipleri",
+  "akilli-asistan",
+  "is-akisi",
+  "uretim-planlama",
+  "yapay-zeka-danismanligi"
+]);
+
+export const solutions = solutionPages
+  .filter(({ slug }) => homeSolutionSlugs.has(slug))
+  .map(({ title, slug, href, text }) => ({ title, slug, href, text }));
 
 export const whyItems = [
   {

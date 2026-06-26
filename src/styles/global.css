@@ -387,6 +387,38 @@ img {
   line-height: 1.7;
 }
 
+.article h2,
+.article h3 {
+  margin: 34px 0 12px;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.article h2 {
+  font-size: 30px;
+}
+
+.article h3 {
+  font-size: 23px;
+}
+
+.article ul,
+.article ol {
+  margin: 14px 0 24px;
+  padding-left: 22px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.article li + li {
+  margin-top: 8px;
+}
+
+.article a {
+  color: var(--red);
+  font-weight: 700;
+}
+
 .solution-card strong {
   display: inline-flex;
   margin-top: 22px;
