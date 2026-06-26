@@ -10,14 +10,18 @@ export type BlogPost = {
   seoTitle: string;
   seoDescription: string;
   content: string;
+  contentHtml?: string;
 };
 
 export const allBlogPosts = generatedPosts as BlogPost[];
 
 export const homeBlogSlugs = [
+  "sirket-islerinde-yapay-zekayi-api-ile-kullanmanin-farki",
   "kobiler-icin-yapay-zeka-danismanligi-rehberi",
   "agentic-ai-ile-satin-alma-sureclerinde-maliyet-azaltma-rehberi",
-  "2026-kobi-yapay-zeka-stratejileri"
+  "kobiler-yapay-zeka-ile-nasil-deger-yaratir",
+  "2026-kobi-yapay-zeka-stratejileri",
+  "kobiler-icin-satin-alma-surecinde-yapay-zeka-kullanimi"
 ];
 
 export const fallbackBlogImage = "/assets/images/blog-kobi-ai.webp";

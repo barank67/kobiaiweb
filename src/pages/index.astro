@@ -151,18 +151,20 @@ const questionColumns = [yesQuestions.slice(0, 8), yesQuestions.slice(8)];
       <p class="eyebrow">Blog</p>
       <h2>Yapay zeka çözümleriyle ilgili içgörüler</h2>
     </div>
-    <div class="blog-grid">
-      {homeBlogPosts.map((post) => (
-        <a class="blog-card" href={`/blog/${post.slug}/`}>
-          <figure>
-            <img src={post.image || fallbackBlogImage} alt={post.title} loading="eager" />
-          </figure>
-          <div>
-            <h3>{post.title}</h3>
-            <p>{post.excerpt}</p>
-          </div>
-        </a>
-      ))}
+    <div class="home-blog-slider" aria-label="Blog yazıları">
+      <div class="home-blog-track">
+        {homeBlogPosts.map((post) => (
+          <a class="blog-card home-blog-card" href={`/blog/${post.slug}/`}>
+            <figure>
+              <img src={post.image || fallbackBlogImage} alt={post.title} loading="eager" />
+            </figure>
+            <div>
+              <h3>{post.title}</h3>
+              <p>{post.excerpt}</p>
+            </div>
+          </a>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -195,6 +197,32 @@ const questionColumns = [yesQuestions.slice(0, 8), yesQuestions.slice(8)];
       window.setInterval(() => {
         showTestimonial((testimonialIndex + 1) % testimonialCards.length);
       }, 7000);
+    }
+
+    const blogTrack = document.querySelector(".home-blog-track");
+    const blogCards = Array.from(document.querySelectorAll(".home-blog-card"));
+    let blogIndex = 0;
+    const visibleBlogCards = () => {
+      if (window.matchMedia("(max-width: 700px)").matches) return 1;
+      if (window.matchMedia("(max-width: 980px)").matches) return 2;
+      return 3;
+    };
+    const showBlogSlide = () => {
+      if (!blogTrack || blogCards.length <= visibleBlogCards()) return;
+      const maxIndex = Math.max(0, blogCards.length - visibleBlogCards());
+      blogIndex = blogIndex > maxIndex ? 0 : blogIndex;
+      const cardWidth = blogCards[0].getBoundingClientRect().width;
+      const gap = Number.parseFloat(window.getComputedStyle(blogTrack).columnGap || "0");
+      blogTrack.style.transform = `translateX(-${blogIndex * (cardWidth + gap)}px)`;
+    };
+    if (blogCards.length > 3) {
+      showBlogSlide();
+      window.setInterval(() => {
+        const maxIndex = Math.max(0, blogCards.length - visibleBlogCards());
+        blogIndex = blogIndex >= maxIndex ? 0 : blogIndex + 1;
+        showBlogSlide();
+      }, 4500);
+      window.addEventListener("resize", showBlogSlide);
     }
   </script>
 </BaseLayout>

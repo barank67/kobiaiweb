@@ -745,6 +745,21 @@ img {
   transform: scale(1.06);
 }
 
+.home-blog-slider {
+  overflow: hidden;
+}
+
+.home-blog-track {
+  display: flex;
+  gap: 18px;
+  transition: transform 0.55s ease;
+  will-change: transform;
+}
+
+.home-blog-card {
+  flex: 0 0 calc((100% - 36px) / 3);
+}
+
 .logo-strip {
   overflow: hidden;
   border-top: 1px solid var(--line);
@@ -920,6 +935,43 @@ img {
   width: 100%;
   max-height: 520px;
   object-fit: cover;
+}
+
+.article-html > *:first-child {
+  margin-top: 0;
+}
+
+.article-html h2,
+.article-html h3,
+.article-html h4 {
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.article-html h2 {
+  margin: 34px 0 14px;
+  font-size: 30px;
+}
+
+.article-html h3 {
+  margin: 28px 0 12px;
+  font-size: 25px;
+}
+
+.article-html h4 {
+  margin: 22px 0 10px;
+  font-size: 20px;
+}
+
+.article-html ul,
+.article-html ol {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.article-html a {
+  color: var(--red);
+  font-weight: 800;
 }
 
 .article-lead {
@@ -1508,6 +1560,10 @@ img {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .home-blog-card {
+    flex-basis: calc((100% - 18px) / 2);
+  }
+
   .discovery-grid,
   .footer-main {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1601,6 +1657,10 @@ img {
   .questions-grid,
   .footer-main {
     grid-template-columns: 1fr;
+  }
+
+  .home-blog-card {
+    flex-basis: 100%;
   }
 
   .solution-card,

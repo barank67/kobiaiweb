@@ -39,7 +39,11 @@ const jsonLd = {
       <img src={image} alt={post.title} loading="eager" />
     </figure>
     <p class="article-lead">{post.excerpt}</p>
-    {post.content.split(/\n+/).filter(Boolean).map((paragraph) => <p>{paragraph}</p>)}
+    {post.contentHtml ? (
+      <div class="article-html" set:html={post.contentHtml} />
+    ) : (
+      post.content.split(/\n+/).filter(Boolean).map((paragraph) => <p>{paragraph}</p>)
+    )}
   </article>
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 </BaseLayout>
