@@ -1,5 +1,5 @@
 ---
-import { navItems, socials } from "../data/site";
+import { navItems, socials, solutionPages } from "../data/site";
 import "../styles/global.css";
 
 const {
@@ -39,7 +39,7 @@ const isStaging = new URL(Astro.site ?? Astro.url.origin).hostname === "test.per
   <body>
     <header class="site-header">
       <a class="brand" href="/" aria-label="Kobi AI ana sayfa">
-        <img class="brand-logo" src="/assets/images/kobiai-logo-white.png" alt="Kobi AI" />
+        <img class="brand-logo" src="/assets/images/kobiai-logo-main.png" alt="Kobi AI" />
       </a>
       <nav class="main-nav" aria-label="Ana menü">
         {navItems.map((item) => (
@@ -60,63 +60,13 @@ const isStaging = new URL(Astro.site ?? Astro.url.origin).hostname === "test.per
     <main>
       <slot />
     </main>
-    <section class="contact-section" id="iletisim">
-      <div class="contact-copy">
-        <p class="eyebrow">Bize Ulaşın</p>
-        <h2>Ekibiniz için doğru yapay zeka ajanlarını birlikte belirleyelim</h2>
-        <p>Formu doldurduktan sonra Gmail, Yahoo veya varsayılan mail uygulamanızla gönderim yapabilirsiniz. Kalıcı form kaydı için ayrıca bir form servisi ya da backend endpointi bağlanmalıdır.</p>
-      </div>
-      <form class="contact-form" id="demo-form">
-        <label>
-          <span>Ad Soyad *</span>
-          <input name="name" type="text" autocomplete="name" required />
-        </label>
-        <label>
-          <span>Firma</span>
-          <input name="company" type="text" autocomplete="organization" />
-        </label>
-        <label>
-          <span>Telefon *</span>
-          <input name="phone" type="tel" autocomplete="tel" required />
-        </label>
-        <label>
-          <span>Email *</span>
-          <input name="email" type="email" autocomplete="email" required />
-        </label>
-        <label class="full-field">
-          <span>Mesajınız</span>
-          <textarea name="message" rows="5"></textarea>
-        </label>
-        <button class="button primary" type="submit">Bize Ulaşın</button>
-        <p class="form-status" role="status" aria-live="polite"></p>
-      </form>
-    </section>
-    <footer class="site-footer">
-      <div>
+    <footer class="site-footer" id="iletisim">
+      <div class="footer-main">
+      <div class="footer-column footer-about">
         <a class="brand footer-brand" href="/">
           <img class="brand-logo" src="/assets/images/kobiai-logo-white.png" alt="Kobi AI" />
         </a>
-        <p>Yapay zeka ajanlarıyla KOBİ operasyonlarını daha hızlı, ölçülebilir ve verimli hale getiren çözüm ortağı.</p>
-      </div>
-      <div>
-        <h2>İletişim</h2>
-        <p class="footer-address">
-          <span aria-hidden="true">
-            <svg viewBox="0 0 24 24" focusable="false">
-              <path d="M12 21s7-5.1 7-12a7 7 0 1 0-14 0c0 6.9 7 12 7 12Z" />
-              <circle cx="12" cy="9" r="2.4" />
-            </svg>
-          </span>
-          <span>
-            Kobiai Yapay Zeka Çözümleri Ltd.Şti.<br />
-            Acıbadem Mah. Derin Sk. Akasya Kule A3 No:8A Üsküdar / İstanbul
-          </span>
-        </p>
-        <a href="mailto:info@kobiai.com.tr">info@kobiai.com.tr</a>
-        <a href="tel:+905333346246">+90 533 334 62 46</a>
-      </div>
-      <div>
-        <h2>Sosyal Medya</h2>
+        <p>Otonom AI ekipleri ve akıllı iş akışları.</p>
         <div class="social-links">
           {socials.map((item) => (
             <a href={item.href} target="_blank" rel="noreferrer" aria-label={item.label}>
@@ -126,6 +76,19 @@ const isStaging = new URL(Astro.site ?? Astro.url.origin).hostname === "test.per
           ))}
         </div>
       </div>
+      <nav class="footer-column footer-solutions" aria-label="Footer çözümler menüsü">
+        <h2>Çözümlerimiz</h2>
+        {solutionPages.map((item) => <a href={item.href}>{item.title}</a>)}
+      </nav>
+      <div class="footer-column">
+        <h2>İletişim</h2>
+        <p>Kobi Ai Yapay Zeka Çözümleri Ltd.Şti.</p>
+        <p>Acıbadem Mah. Derin Sk. Akasya Kule A3 No:8A 34660 Üsküdar / İstanbul</p>
+        <a href="mailto:info@kobiai.com.tr">info@kobiai.com.tr</a>
+        <a href="tel:+905333346246">+90 533 334 62 46</a>
+      </div>
+      </div>
+      <p class="footer-copy">Kobi AI 2026 © Tüm Hakları Saklıdır.</p>
     </footer>
     <button class="chatbot-toggle" type="button" aria-label="Chatbot'u aç" aria-expanded="false">
       <img src="/assets/images/kobi-ai-chatbot-icon.png" alt="" />

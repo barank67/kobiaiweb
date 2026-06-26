@@ -4,66 +4,60 @@ const solutionContentBySlug = new Map(solutionsGenerated.map((solution) => [solu
 
 const baseSolutionPages = [
   {
-    title: "Yapay Zeka ile Satın Alma",
+    title: "Satın Alma Süreçlerinde Tam Optimizasyon",
     slug: "yapay-zeka-ile-satin-alma",
-    text: "Stok, tedarikçi, teklif ve sipariş kararlarını yapay zeka destekli analizlerle daha kontrollü yönetin.",
+    text: "Stok, sipariş ve teslimat döngünüzü analiz ederek işletmenize özel, zamanında ve doğru miktarda satın alma listeleri oluşturur. Fazla stoktan ve ürün eksikliğinden doğan kayıpları önler.",
     detail:
       "Kobi AI, geçmiş tüketim verileri, mevsimsel trendler, tedarikçi performansı ve üretim planlarını birlikte değerlendirerek satın alma ekipleri için uygulanabilir sipariş önerileri üretir.",
     benefits: ["Stok fazlası ve stok yokluğu riskini azaltır", "Tedarikçi tekliflerini karşılaştırmayı hızlandırır", "Satın alma kararlarını ölçülebilir veriye bağlar"]
   },
   {
-    title: "Yapay Zeka ile Karlılık Optimizasyonu",
-    slug: "yapay-zeka-ile-karlilik-optimizasyonu",
-    text: "Fiyatlama, maliyet ve karlılık kararlarında veriye dayalı senaryolarla daha doğru aksiyon alın.",
+    title: "Agentic AI (Otonom Yapay Zeka Ekipleri)",
+    slug: "agentic-ai-otonom-yapay-zeka-ekipleri",
+    text: "İhtiyacınıza özel AI Agent’lar tasarlıyor, birbirleriyle entegre çalıştırıyor ve iş süreçlerinizi 7/24 otonom hale getiriyoruz.",
     detail:
-      "Fiyatlama kararlarını etkileyen maliyet, talep, rekabet ve müşteri davranışı sinyallerini tek bakışta analiz ederek işletmenize özel karlılık senaryoları oluşturur.",
-    benefits: ["Optimum fiyatlama stratejilerini görünür kılar", "Marj kaybı riskini erken yakalar", "Finans ve satış ekiplerini aynı veri üzerinde buluşturur"]
+      "Kobi AI, işletmenizin veri kaynaklarını ve karar akışlarını analiz ederek birlikte çalışan yapay zeka ajanları tasarlar. Bu ajanlar görevleri takip eder, karar önerileri üretir ve süreçleri insan kontrolünü koruyarak otomatikleştirir.",
+    benefits: ["Departmanlar arasında koordineli çalışan ajan ekipleri kurar", "7/24 takip ve aksiyon önerisi üretir", "Tekrarlı operasyon yükünü azaltır"]
   },
   {
-    title: "Yapay Zeka Asistanı",
-    slug: "yapay-zeka-asistani",
-    text: "Müşteri iletişimi, satış desteği ve bilgi erişimi için işletmenize özel çalışan yapay zeka asistanı kurun.",
+    title: "İşletmenize Özel Akıllı Asistan",
+    slug: "akilli-asistan",
+    sourceSlug: "yapay-zeka-asistani",
+    text: "Yapay zeka tabanlı chatbot, müşteri sorularını anında yanıtlar, satış süreçlerini hızlandırır ve operasyonel yükü azaltır. Müşteri memnuniyetini artırırken ekiplerinize zaman kazandırır.",
     detail:
       "Ürün, hizmet ve süreç bilgilerinizi öğrenen yapay zeka asistanı; müşterilerinizin ve ekiplerinizin sorularına günün her saati tutarlı cevaplar verebilir.",
     benefits: ["7/24 müşteri iletişimi sağlar", "Tekrarlı soruları otomatik karşılar", "Satış ve destek ekiplerinin iş yükünü azaltır"]
   },
   {
-    title: "Üretim Planlama",
-    slug: "uretim-planlama",
-    text: "Stok, kapasite, sipariş ve teslim tarihlerini birlikte değerlendirerek üretim planlamasını güçlendirin.",
-    detail:
-      "Üretim planlama ajanları, kapasite kullanımını, malzeme ihtiyaçlarını ve teslim tarihlerini analiz ederek daha isabetli planlama kararları alınmasına yardımcı olur.",
-    benefits: ["Teslim tarihi sapmalarını azaltır", "Kapasite ve stok dengesini izlenebilir hale getirir", "Planlama ekibine erken uyarı sinyalleri verir"]
-  },
-  {
-    title: "İş Akışı",
+    title: "Otomatik ve Koordine İş Akışları",
     slug: "is-akisi",
-    text: "Tekrarlı operasyon adımlarını ajan destekli iş akışlarına dönüştürerek ekiplerin hızını artırın.",
+    text: "Yazılımlarınızdan aldığı verilerle tüm iş süreçlerini uçtan uca planlar, takip eder ve yönlendirir. İş gücünüzü doğru yerde, doğru zamanda kullanmanızı sağlar.",
     detail:
       "Kobi AI iş akışı çözümleri; onay, takip, raporlama ve veri toplama gibi tekrarlı adımları otomatikleştirerek operasyonların daha tutarlı ilerlemesini sağlar.",
     benefits: ["Tekrarlı işleri azaltır", "Süreç sahipliğini netleştirir", "Raporlama ve takip disiplinini artırır"]
   },
   {
-    title: "Yapay Zeka Danışmanlığı",
+    title: "Dinamik Üretim Planlaması",
+    slug: "uretim-planlama",
+    text: "Üretim hattındaki verileri anlık olarak değerlendirir, koşullar değiştiğinde üretim planlarını saniyeler içinde günceller. Verimlilikte süreklilik ve minimum hata ile üretim sağlanır.",
+    detail:
+      "Üretim planlama ajanları, kapasite kullanımını, malzeme ihtiyaçlarını ve teslim tarihlerini analiz ederek daha isabetli planlama kararları alınmasına yardımcı olur.",
+    benefits: ["Teslim tarihi sapmalarını azaltır", "Kapasite ve stok dengesini izlenebilir hale getirir", "Planlama ekibine erken uyarı sinyalleri verir"]
+  },
+  {
+    title: "Yapay Zeka Strateji ve Uygulama Danışmanlığı",
     slug: "yapay-zeka-danismanligi",
-    text: "Şirketiniz için doğru yapay zeka kullanım alanlarını belirleyip uygulanabilir yol haritası oluşturun.",
+    text: "İhtiyacınıza özel yapay zeka çözümlerini belirler, uygulama sürecini uçtan uca yönetiriz. Teknolojiyi karmaşık olmaktan çıkarır, işinize değer katan bir araca dönüştürürüz.",
     detail:
       "Süreç analizi, veri hazırlığı, ajan tasarımı ve pilot uygulama adımlarını birlikte ele alarak yapay zeka yatırımının iş hedefleriyle uyumlu ilerlemesini sağlarız.",
     benefits: ["Öncelikli kullanım alanlarını netleştirir", "Pilot projeleri ölçülebilir kılar", "Ekiplerin yapay zekayı benimsemesini kolaylaştırır"]
-  },
-  {
-    title: "Agentic AI Teklif Asistanı",
-    slug: "agentic-ai-teklif-asistani",
-    text: "Teklif hazırlama, karşılaştırma ve takip süreçlerinde ajan destekli hız ve kontrol kazanın.",
-    detail:
-      "Teklif asistanı; müşteri ihtiyacı, geçmiş teklifler, ürün bilgisi ve fiyatlama kurallarını birlikte değerlendirerek satış ekiplerinin daha hızlı ve tutarlı teklif üretmesine yardımcı olur.",
-    benefits: ["Teklif hazırlama süresini kısaltır", "Standart dışı teklif riskini azaltır", "Satış takibini daha görünür hale getirir"]
   }
 ];
 
-export const solutionPages = baseSolutionPages.map((solution) => ({
+export const solutionPages = baseSolutionPages.map(({ sourceSlug, ...solution }) => ({
+  ...(solutionContentBySlug.get(sourceSlug ?? solution.slug) ?? {}),
   ...solution,
-  ...solutionContentBySlug.get(solution.slug)
+  href: `/${solution.slug}/`
 }));
 
 export const navItems = [
@@ -81,7 +75,7 @@ export const navItems = [
   {
     label: "Çözümlerimiz",
     href: "/cozumler/",
-    children: solutionPages.map(({ title, slug }) => ({ label: title, href: `/cozumler/${slug}/` }))
+    children: solutionPages.map(({ title, href }) => ({ label: title, href }))
   },
   { label: "Neden Kobi AI?", href: "/#neden" },
   { label: "Basında Biz", href: "/basinda-biz/" },
@@ -118,48 +112,83 @@ export const techLogos = [
   { name: "Claude", src: "/assets/logos/claude.svg" }
 ];
 
-export const solutions = [
-  {
-    ...solutionPages[0],
-    title: "Satın Alma Süreçlerinde Tam Optimizasyon"
-  },
-  {
-    ...solutionPages[1],
-    title: "Finansal Kontrol ve Tahminleme"
-  },
-  {
-    title: "Satış Operasyonlarında Akıllı Takip",
-    slug: "agentic-ai-teklif-asistani",
-    text: "Fırsatları, görüşmeleri ve teklifleri satış ekibiniz için eyleme dönüştüren ajanlarla yönetin."
-  },
-  {
-    title: "Pazarlama İçerik ve Segmentasyon",
-    slug: "is-akisi",
-    text: "Hedef kitle, kampanya fikri ve içerik üretimini şirket dilinizle tutarlı şekilde ölçekleyin."
-  },
-  {
-    ...solutionPages[3],
-    title: "Üretim Planlama Desteği"
-  },
-  {
-    title: "Yönetim Karar Destek Paneli",
-    slug: "yapay-zeka-danismanligi",
-    text: "Departmanlardan gelen sinyalleri özetleyen, önceliklendiren ve aksiyon öneren yönetim görünümü kurun."
-  }
-];
+export const solutions = solutionPages.map(({ title, slug, href, text }) => ({ title, slug, href, text }));
 
 export const whyItems = [
   {
-    title: "KOBİ Odaklı Kurgu",
-    text: "Kurumsal yapay zeka yaklaşımını KOBİ bütçesi, ekip yapısı ve operasyon gerçekleriyle uyumlu hale getiriyoruz."
+    title: "Derin Uzmanlık, Güçlü Ekip",
+    text: "Yapay zeka, yazılım geliştirme ve kurumsal dönüşüm alanlarında 35 yılı aşkın tecrübe. 10’dan fazla sektörde, 500+ başarılı kurulum gerçekleştirmiş uzman kadro."
   },
   {
-    title: "Ajan Tabanlı İş Akışları",
-    text: "Tek seferlik araçlar yerine muhasebe, finans, satış ve satın alma süreçlerine yerleşen kalıcı ajanlar tasarlıyoruz."
+    title: "Verinizden Güce Dönüşen Çözümler",
+    text: "SAP, Logo, Netsis gibi sistemlerdeki verileriniz, yapay zeka destekli analizlerle işletmenize özel katma değere dönüşür. Hazırdaki verinizle fark yaratın."
   },
   {
-    title: "Ölçülebilir Dönüşüm",
-    text: "Her projeyi zaman kazancı, hata azalması, maliyet kontrolü ve gelir etkisi üzerinden takip edilebilir kılıyoruz."
+    title: "Somut Katma Değer, Ölçülebilir Kazanç",
+    text: "Zaman, maliyet ve kârlılık avantajları sadece iddia değil, verilerle ispatlı. İşletmenizin performansını gerçek sonuçlarla ölçün."
+  }
+];
+
+export const discoveryItems = [
+  {
+    number: "01",
+    title: "Akıllı Sipariş",
+    text: "Doğru zamanda, doğru miktarda sipariş verin, optimum stokla çalışın."
+  },
+  {
+    number: "02",
+    title: "Akıllı Üretim",
+    text: "Daha hızlı planlama, daha az hata, maksimum verimlilik sağlayın."
+  },
+  {
+    number: "03",
+    title: "Yüksek Karlılık",
+    text: "Akıllı fiyatlama ve gerçek maliyet analizi ile maksimum karlılığa ulaşın."
+  },
+  {
+    number: "04",
+    title: "Sürdürülebilirlik",
+    text: "Verimliliği artırarak uzun vadeli başarıyı garanti altına alın."
+  }
+];
+
+export const yesQuestions = [
+  "Satışı değişken ürünlere uygun çözümünüz var mı?",
+  "Farklı tedarikçilerden farklı periyotlarda sipariş verilmesine uygun çözümünüz var mı?",
+  "Talepteki ani değişimlere uyum sağlayan çözümünüz var mı?",
+  "Üretim planlamaya bakarak satın alma planlayan çözümünüz var mı?",
+  "Son aşamaya gelmiş satış tekliflerine bakarak satın alma planlayan çözümünüz var mı?",
+  "Hangi ürün, hangi müşteriye, hangi fiyatla satılmalı?",
+  "Piyasa koşulları, faizler, kur riski arttığında buna uygun fiyatlama?",
+  "Rekabet koşullarına uygun fiyatlama?",
+  "Stokta ne zaman, ne kadar bulunmalı?",
+  "Hangi ürün için ne zaman sipariş verilmeli?",
+  "Fazla stok yükünden nasıl kurtulurum?",
+  "Eksik ürün nedeniyle müşteri kaybetmemek için ne yapmalıyım?",
+  "Hangi ürün, hangi müşteriye, hangi fiyatla satılmalı?",
+  "Piyasa koşulları, faizler, kur riski arttığında buna uygun fiyatlama?",
+  "Rekabet koşullarına uygun fiyatlama?",
+  "Müşteri bazında risk analizi?"
+];
+
+export const testimonials = [
+  {
+    title: '"Yeni sistem sayesinde müşteri siparişlerini çok daha hızlı teslim edebiliyoruz."',
+    text: "Yapay zeka destekli planlama sistemimize geçtikten sonra, sipariş-teslimat süreçlerimizde dramatik bir hızlanma yaşadık. Eskiden manuel olarak günler süren planlama işlemleri, artık sadece birkaç saat içinde tamamlanıyor. Sistem, binlerce siparişi eş zamanlı analiz ederek en optimal üretim ve teslimat planını otomatik olarak oluşturuyor. Bu sayede müşterilerimize verdiğimiz teslimat sürelerini kısalttık ve taahhütlerimizi çok daha güvenilir bir şekilde yerine getiriyoruz. Üretim aksaksız ilerliyor, stok yönetimi optimize çalışıyor ve sonuçta müşteri memnuniyetimiz önemli ölçüde arttı.",
+    name: "Diğdem Polat",
+    role: "Bonfiglioli Tedarik Zinciri Müdürü"
+  },
+  {
+    title: '"Kobi AI ile çalışmak operasyonel verimliliğimizi arttırdı ve karmaşık süreçleri çok daha basit hale getirdi."',
+    text: "Kobi AI ekibi ilk toplantımızdan itibaren ihtiyaçlarımızı anladı ve çözüm önerileri getirdi ayrıca her adımda sorularımızı titizlikle yanıtladılar. Dijital dönüşüm macerasına atılmak isteyen ama nereden başlayacağını bilmeyen kobilere Kobi AI ile tanışmalarını öneriyorum.",
+    name: "Defne Erbilek",
+    role: "Kortek, Business Development Manager"
+  },
+  {
+    title: '"Yeni raporlar sayesinde fiyatlarımızı daha rekabetçi belirleyebiliyoruz."',
+    text: "Yapay zeka destekli raporlama sistemimiz sayesinde, artık fiyatlandırma kararlarımızı tahminlere değil, somut verilere dayandırıyoruz. Piyasa dinamiklerini, rakip fiyatlarını, müşteri davranışlarını ve maliyet yapımızı anlık olarak analiz eden raporlarımız, her ürün ve müşteri için en uygun fiyat noktasını belirlememizi sağlıyor.",
+    name: "İsmail KOÇ",
+    role: "RMG GAZ, CEO"
   }
 ];
 

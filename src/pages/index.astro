@@ -1,17 +1,18 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { agents, solutions, techLogos, whyItems } from "../data/site";
+import { agents, discoveryItems, solutions, testimonials, whyItems, yesQuestions } from "../data/site";
 import { fallbackBlogImage, homeBlogPosts } from "../data/blog";
-import { fallbackPressImage, homePressPosts } from "../data/press";
+
+const questionColumns = [yesQuestions.slice(0, 8), yesQuestions.slice(8)];
 ---
-<BaseLayout title="Kobi AI | Şirketler İçin Yapay Zeka Ajanları">
+<BaseLayout title="Kobi AI | Şirketler İçin Yapay Zeka Çözümleri">
   <section class="hero">
     <div class="hero-copy">
       <p class="eyebrow">Agentic AI ile operasyonel dönüşüm</p>
       <h1>KOBİ'ler için yapay zeka ajanları</h1>
       <p>
-        Muhasebe, finans, satış, satın alma ve pazarlama süreçlerinize birlikte çalışan
-        yapay zeka ajanları ekleyin.
+        Muhasebe, finans, satış, satın alma, üretim ve operasyon süreçlerinize birlikte
+        çalışan yapay zeka ajanları ekleyin.
       </p>
       <div class="hero-actions">
         <a class="button primary" href="#iletisim">Demo Planla</a>
@@ -25,45 +26,61 @@ import { fallbackPressImage, homePressPosts } from "../data/press";
     </div>
   </section>
 
-  <section class="logo-strip" aria-label="Teknoloji logoları">
-    <div class="logo-track">
-      {[...techLogos, ...techLogos].map((logo) => (
-        <span>
-          <img src={logo.src} alt={logo.name} loading="eager" />
-        </span>
-      ))}
+  <section class="home-intro">
+    <div class="narrow-copy">
+      <h2>Ne Yapıyoruz?</h2>
+      <p>
+        Yapay Zeka asistanlarını işinize adapte ederek stok, karlılık, pazarlama, satış,
+        operasyon ve süreç yönetimi gibi tüm işleyişinizi etkileyecek konularda şirketinizi
+        verimli hale getiriyoruz.
+      </p>
     </div>
   </section>
 
-  <section class="intro-band">
-    <div class="reveal-box">
-      <p>Şirketler için uygulanabilir yapay zeka</p>
-      <h2>Ekibinize Yapay Zeka Ajanları Dahil Etmek İster misiniz?</h2>
+  <section class="focus-band">
+    <div class="narrow-copy">
+      <h2>Odaklandığımız Teknoloji ve İş Alanları</h2>
+      <p>
+        İşletmenizin operasyonel verimliliğini artırmak ve kârlılığınızı en üst düzeye çıkarmak
+        için yapay zekanın gücünü kullanıyoruz. Tedarik zincirinden müşteri ilişkilerine kadar her
+        alanda, veriye dayalı ve akıllı çözümlerle sürdürülebilir büyümenizi sağlıyoruz.
+      </p>
     </div>
   </section>
 
-  <section class="section" id="cozumler">
-    <div class="section-head">
-      <p class="eyebrow">Çözümler</p>
-      <h2>Departmanlara yayılan ajan destekli iş akışları</h2>
-    </div>
+  <section class="solution-panel" id="cozumler" aria-label="Çözüm alanları">
     <div class="solution-grid">
       {solutions.map((item) => (
-        <a class="solution-card solution-link" href={`/cozumler/${item.slug}/`}>
-          <span></span>
+        <a class="solution-card solution-link" href={item.href}>
           <h3>{item.title}</h3>
           <p>{item.text}</p>
+          <strong>Çözüm Mimarisini Görüntüle →</strong>
         </a>
       ))}
     </div>
   </section>
 
-  <section class="section dark-section" id="neden">
-    <div class="section-head">
-      <p class="eyebrow">Neden Kobi AI?</p>
-      <h2>Süreçlerinizi anlayan, ölçülebilir sonuç üreten yapı</h2>
+  <section class="why-intro" id="neden">
+    <div class="narrow-copy">
+      <h2>Neden KOBİ AI?</h2>
+      <p>
+        Biz, Kobi Ai olarak, yapay zekayı sadece bir teknoloji olarak görmüyoruz; onu işletmenizin
+        kârlılığını ve verimliliğini artıran stratejik bir güce dönüştürüyoruz. Sizi rakiplerinizden
+        ayıracak ve pazarınızda lider yapacak bir ortak arıyorsanız, doğru yerdesiniz. Çünkü biz size
+        üç temel değer sunuyoruz:
+      </p>
     </div>
-    <div class="why-grid">
+  </section>
+
+  <section class="why-feature">
+    <figure>
+      <img
+        src="/assets/wp/2025/11/ChatGPT-Image-24-Eki-2025-17_53_31-683x1024.avif"
+        alt="Kobi AI yapay zeka asistanı görseli"
+        loading="eager"
+      />
+    </figure>
+    <div class="why-stack">
       {whyItems.map((item) => (
         <button class="why-card" type="button">
           <strong>{item.title}</strong>
@@ -73,50 +90,67 @@ import { fallbackPressImage, homePressPosts } from "../data/press";
     </div>
   </section>
 
-  <section class="section split-feature">
-    <div>
-      <p class="eyebrow">Uygulama yaklaşımı</p>
-      <h2>Analizden canlı kullanıma kontrollü geçiş</h2>
-      <p>
-        Önce tekrar eden karar noktalarını ve veri kaynaklarını çıkarırız. Sonra ajan
-        akışlarını küçük ama etkisi ölçülebilir modüller halinde devreye alırız.
-      </p>
-    </div>
-    <div class="timeline">
-      <span>01 Süreç Haritası</span>
-      <span>02 Ajan Tasarımı</span>
-      <span>03 Pilot Kullanım</span>
-      <span>04 Ölçüm ve Yaygınlaştırma</span>
-    </div>
-  </section>
-
-  <section class="section blog-preview">
+  <section class="discovery-section">
     <div class="section-head">
-      <p class="eyebrow">Basında Biz</p>
-      <h2>Kobi AI hakkında çıkan haberler</h2>
+      <p class="eyebrow">Kobi AI</p>
+      <h2>İşiniz İçin Doğru Çözüm Nedir Birlikte Keşfedelim!</h2>
     </div>
-    <div class="blog-grid">
-      {homePressPosts.map((post) => (
-        <a class="blog-card lift-card" href={`/basinda-biz/${post.slug}/`}>
-          <figure>
-            <img src={post.image || fallbackPressImage} alt={post.title} loading="eager" />
-          </figure>
-          <div>
-            <h3>{post.title}</h3>
-            <p>{post.excerpt}</p>
-          </div>
-        </a>
+    <div class="discovery-grid">
+      {discoveryItems.map((item) => (
+        <article class="discovery-card">
+          <span>{item.number}</span>
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+        </article>
       ))}
     </div>
-    <div class="section-actions">
-      <a class="button ghost" href="/basinda-biz/">Tüm Haberler</a>
+  </section>
+
+  <section class="questions-section">
+    <div class="section-head">
+      <h2>Cevabı "Evet" Olan Sorular</h2>
+    </div>
+    <div class="questions-grid">
+      {questionColumns.map((column, columnIndex) => (
+        <div class="question-column">
+          {column.map((question) => <p>{question}</p>)}
+          {columnIndex === 1 && (
+            <div class="answer-card">
+              <span>Bu Soruların Cevabını Artık</span>
+              <strong>Veri ve Yapay Zeka ile Veriyoruz</strong>
+            </div>
+          )}
+        </div>
+      ))}
     </div>
   </section>
 
-  <section class="section blog-preview">
+  <section class="testimonials-section">
+    <div class="section-head">
+      <h2>Güven Duyulan İş Ortağı KOBİ AI Müşteri Görüşleri</h2>
+    </div>
+    <div class="testimonial-slider" aria-live="polite">
+      {testimonials.map((item, index) => (
+        <article class={`testimonial-card${index === 0 ? " is-active" : ""}`} aria-hidden={index === 0 ? "false" : "true"}>
+          <div class="testimonial-copy">
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+            <div class="stars" aria-label="5 yıldız">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+            <strong>{item.name}</strong>
+            <small>{item.role}</small>
+          </div>
+          <img src="/assets/images/kobiai-logo-main.png" alt="Kobi AI" loading="eager" />
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="blog-preview">
     <div class="section-head">
       <p class="eyebrow">Blog</p>
-      <h2>Yapay zeka ajanlarıyla ilgili içgörüler</h2>
+      <h2>Yapay zeka çözümleriyle ilgili içgörüler</h2>
     </div>
     <div class="blog-grid">
       {homeBlogPosts.map((post) => (
@@ -142,5 +176,21 @@ import { fallbackPressImage, homePressPosts } from "../data/press";
         card.classList.toggle("is-active");
       });
     });
+
+    const testimonialCards = Array.from(document.querySelectorAll(".testimonial-card"));
+    let testimonialIndex = 0;
+    const showTestimonial = (nextIndex) => {
+      testimonialCards.forEach((card, index) => {
+        const isActive = index === nextIndex;
+        card.classList.toggle("is-active", isActive);
+        card.setAttribute("aria-hidden", isActive ? "false" : "true");
+      });
+    };
+    if (testimonialCards.length > 1) {
+      window.setInterval(() => {
+        testimonialIndex = (testimonialIndex + 1) % testimonialCards.length;
+        showTestimonial(testimonialIndex);
+      }, 7000);
+    }
   </script>
 </BaseLayout>

@@ -19,7 +19,7 @@ import { solutionPages } from "../../data/site";
     </div>
     <div class="solution-grid">
       {solutionPages.map((item) => (
-        <a class="solution-card solution-link" href={`/cozumler/${item.slug}/`}>
+        <a class="solution-card solution-link" href={item.href}>
           <span></span>
           <h2>{item.title}</h2>
           <p>{item.text}</p>

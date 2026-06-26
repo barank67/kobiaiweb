@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { solutionPages } from "../data/site";
+
+export function getStaticPaths() {
+  return solutionPages.map((solution) => ({ params: { slug: solution.slug }, props: { solution } }));
+}
+
+const { solution } = Astro.props;
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: solution.title,
+  description: solution.text,
+  provider: { "@type": "Organization", name: "Kobi AI" },
+  areaServed: "TR"
+};
+---
+<BaseLayout
+  title={`${solution.title} | Kobi AI`}
+  description={solution.text}
+  canonical={new URL(solution.href, Astro.site ?? Astro.url.origin).toString()}
+>
+  <section class="page-hero">
+    <div class="reveal-box">
+      <p>Çözümlerimiz</p>
+      <h1>{solution.title}</h1>
+    </div>
+  </section>
+  {solution.contentHtml ? (
+    <section class="section">
+      <article class="solution-content" set:html={solution.contentHtml} />
+      <div class="solution-cta">
+        <a class="button primary" href="/#iletisim">Demo Planla</a>
+      </div>
+    </section>
+  ) : (
+    <section class="section solution-detail">
+      <div class="solution-detail-copy">
+        <p class="eyebrow">Agentic AI çözümü</p>
+        <h2>{solution.text}</h2>
+        <p>{solution.detail}</p>
+        <a class="button primary" href="/#iletisim">Demo Planla</a>
+      </div>
+      <div class="solution-benefits">
+        {solution.benefits.map((benefit) => (
+          <article>
+            <span></span>
+            <p>{benefit}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</BaseLayout>
