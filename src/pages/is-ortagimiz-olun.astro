@@ -1,0 +1,150 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const offerItems = [
+  "Kullanıma hazır, etkili ve ölçeklenebilir yapay zeka yazılımları",
+  "Satış ve tanıtım süreçlerinde ihtiyaç duyacağınız tüm materyaller",
+  "Destekleyici eğitimler ve teknik bilgilendirmeler",
+  "Performansa dayalı kazanç modeli (komisyon / lisans paylaşımları)"
+];
+
+const audienceItems = [
+  "Yazılım, teknoloji, dijital dönüşüm veya danışmanlık alanlarında faaliyet gösteren kişi ve kurumlar",
+  "Girişimci ruha sahip, teknolojiyi yakından takip eden profesyoneller",
+  "Kendi müşteri portföyüne ek gelir sağlamak isteyen çözüm ortakları",
+  "Satış, pazarlama veya iş geliştirme deneyimi olan herkes"
+];
+
+const serviceOptions = [
+  "Yapay Zeka İle Satın Alma Optimizasyonu",
+  "Yapay Zeka İle Karlılık Optimizasyonu",
+  "Akıllı Asistan",
+  "İş Akışı",
+  "Üretim Planlama",
+  "Yapay Zeka Danışmanlığı"
+];
+---
+<BaseLayout
+  title="İş Ortağımız Olun | Kobi AI"
+  description="Yapay zeka uygulamaları bayilik sistemi sayesinde girişimci ruhunuzu destekleyin ve yeni kazanç fırsatları keşfedin."
+  image="/assets/wp/2026/01/Kurumsal_Is_Ortagimiz_Olun-1-scaled.avif"
+>
+  <section class="page-hero light-page-hero">
+    <div class="reveal-box">
+      <p>Kurumsal</p>
+      <h1>İş Ortağımız Olun</h1>
+    </div>
+  </section>
+
+  <section class="section partner-hero">
+    <div class="partner-copy">
+      <p class="eyebrow">Çözüm ortaklığı</p>
+      <h2>Yapay Zeka Çözümlerimizi Birlikte Daha Geniş Kitlelere Ulaştıralım</h2>
+      <p>
+        Yapay zeka temelli yazılım çözümlerimiz; işletmelerin verimliliğini artırmak,
+        süreçleri optimize etmek ve dijital dönüşüm yolculuklarını hızlandırmak için tasarlanmıştır.
+      </p>
+      <p>
+        Eğer siz de bu teknolojileri kendi çevrenize tanıtmak, satışını gerçekleştirmek ve birlikte
+        büyümek isterseniz, sizi iş ortaklarımız arasında görmekten memnuniyet duyarız.
+      </p>
+    </div>
+    <figure class="partner-visual">
+      <img
+        src="/assets/wp/2026/01/Kurumsal_Is_Ortagimiz_Olun-1-scaled.avif"
+        alt="Kobi AI iş ortaklığı"
+        loading="eager"
+      />
+    </figure>
+  </section>
+
+  <section class="section partner-info">
+    <article>
+      <h2>Ne Sunuyoruz?</h2>
+      <ul>
+        {offerItems.map((item) => <li>{item}</li>)}
+      </ul>
+    </article>
+    <article>
+      <h2>Kimler İçin Uygun?</h2>
+      <ul>
+        {audienceItems.map((item) => <li>{item}</li>)}
+      </ul>
+    </article>
+  </section>
+
+  <section class="section partner-application">
+    <div class="partner-copy">
+      <p class="eyebrow">Başvuru formu</p>
+      <h2>Hemen Bağlantıya Geçin</h2>
+      <p>
+        Yapay zeka çözümlerimizin tanıtım ve satışını yapmak isterseniz, aşağıdaki formu doldurarak
+        bizimle iletişime geçebilirsiniz. Sizi tanımaktan ve birlikte çalışmaktan mutluluk duyarız.
+      </p>
+    </div>
+    <form id="partner-form" class="partner-form">
+      <label>
+        <span>Ad Soyad *</span>
+        <input type="text" name="name" autocomplete="name" required />
+      </label>
+      <label>
+        <span>Firma</span>
+        <input type="text" name="company" autocomplete="organization" />
+      </label>
+      <label>
+        <span>Telefon *</span>
+        <input type="tel" name="phone" autocomplete="tel" required />
+      </label>
+      <label>
+        <span>Email *</span>
+        <input type="email" name="email" autocomplete="email" required />
+      </label>
+      <label class="partner-form-wide">
+        <span>Hizmet</span>
+        <select name="service">
+          {serviceOptions.map((item) => <option value={item}>{item}</option>)}
+        </select>
+      </label>
+      <label class="partner-form-wide">
+        <span>Mesajınız</span>
+        <textarea name="message" rows="5" maxlength="180"></textarea>
+      </label>
+      <button class="button primary" type="submit">Gönder</button>
+      <p class="partner-form-status" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.querySelector("#partner-form");
+      const status = document.querySelector(".partner-form-status");
+
+      form?.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+
+        const data = new FormData(form);
+        const body = [
+          `Ad Soyad: ${data.get("name")}`,
+          `Firma: ${data.get("company") || "-"}`,
+          `Telefon: ${data.get("phone")}`,
+          `Email: ${data.get("email")}`,
+          `Hizmet: ${data.get("service") || "-"}`,
+          "",
+          `Mesaj: ${data.get("message") || "-"}`
+        ].join("\n");
+        const subject = "Kobi AI İş Ortaklığı Başvurusu";
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=info@kobiai.com.tr&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        const yahooUrl = `https://compose.mail.yahoo.com/?to=info@kobiai.com.tr&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        const mailtoUrl = `mailto:info@kobiai.com.tr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        status.innerHTML = `
+          <span>Başvurunuzu göndermek için tercih ettiğiniz servisi açın:</span>
+          <a href="${gmailUrl}" target="_blank" rel="noreferrer">Gmail</a>
+          <a href="${yahooUrl}" target="_blank" rel="noreferrer">Yahoo</a>
+          <a href="${mailtoUrl}">Mail uygulaması</a>
+        `;
+      });
+    });
+  </script>
+</BaseLayout>

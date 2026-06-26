@@ -76,6 +76,7 @@ export const navItems = [
     children: [
       { label: "Hakkımızda", href: "/hakkimizda/" },
       { label: "İş Ortaklarımız", href: "/is-ortaklarimiz/" },
+      { label: "İş Ortağımız Olun", href: "/is-ortagimiz-olun/" },
       { label: "Gizlilik Politikası", href: "/gizlilik-politikasi/" }
     ]
   },
