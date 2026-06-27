@@ -55,7 +55,7 @@ const isStaging = new URL(Astro.site ?? Astro.url.origin).hostname === "test.per
           )
         ))}
       </nav>
-      <a class="header-cta" href="/#iletisim">Bize Ulaşın</a>
+      <a class="header-cta" href="/#iletisim-formu" data-contact-open>Bize Ulaşın</a>
     </header>
     <main>
       <slot />
@@ -93,6 +93,43 @@ const isStaging = new URL(Astro.site ?? Astro.url.origin).hostname === "test.per
     <button class="chatbot-toggle" type="button" aria-label="Chatbot'u aç" aria-expanded="false">
       <img src="/assets/images/kobi-ai-chatbot-icon.png" alt="" />
     </button>
+    <section class="contact-modal" id="iletisim-formu" aria-hidden="true">
+      <div class="contact-modal-backdrop" data-contact-close></div>
+      <div class="contact-dialog" role="dialog" aria-modal="true" aria-labelledby="contact-dialog-title">
+        <button class="contact-close" type="button" aria-label="İletişim formunu kapat" data-contact-close>×</button>
+        <div class="contact-copy">
+          <p class="eyebrow">Bize Ulaşın</p>
+          <h2 id="contact-dialog-title">İşiniz İçin Doğru Çözümü Birlikte Keşfedelim</h2>
+          <p>
+            İhtiyacınızı paylaşın; yapay zeka çözümlerimizin işletmenizde nasıl değer üretebileceğini birlikte değerlendirelim.
+          </p>
+        </div>
+        <form id="demo-form" class="contact-form">
+          <label>
+            <span>Ad Soyad *</span>
+            <input type="text" name="name" autocomplete="name" required />
+          </label>
+          <label>
+            <span>Firma</span>
+            <input type="text" name="company" autocomplete="organization" />
+          </label>
+          <label>
+            <span>Telefon *</span>
+            <input type="tel" name="phone" autocomplete="tel" required />
+          </label>
+          <label>
+            <span>Email *</span>
+            <input type="email" name="email" autocomplete="email" required />
+          </label>
+          <label class="contact-form-wide">
+            <span>Mesajınız</span>
+            <textarea name="message" rows="5" maxlength="240"></textarea>
+          </label>
+          <button class="button primary" type="submit">Gönder</button>
+          <p class="form-status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
     <section class="chatbot-panel" aria-live="polite" aria-hidden="true">
       <div class="chatbot-head">
         <strong>Kobi AI Asistan</strong>
@@ -124,6 +161,9 @@ const isStaging = new URL(Astro.site ?? Astro.url.origin).hostname === "test.per
         const chatInput = document.querySelector(".chatbot-form input");
         const demoForm = document.querySelector("#demo-form");
         const formStatus = document.querySelector(".form-status");
+        const contactModal = document.querySelector(".contact-modal");
+        const contactOpeners = document.querySelectorAll("[data-contact-open]");
+        const contactClosers = document.querySelectorAll("[data-contact-close]");
         const chatbotEndpoint = "https://chatbot-858666494590.europe-west1.run.app/chat";
         const getSessionId = () => {
           const key = "kobiai_chat_session_id";
@@ -149,6 +189,17 @@ const isStaging = new URL(Astro.site ?? Astro.url.origin).hostname === "test.per
           messages?.scrollTo({ top: messages.scrollHeight, behavior: "smooth" });
           return item;
         };
+        const setContactOpen = (open) => {
+          contactModal?.classList.toggle("is-open", open);
+          contactModal?.setAttribute("aria-hidden", open ? "false" : "true");
+          document.body.classList.toggle("has-modal", open);
+          if (open) window.setTimeout(() => demoForm?.querySelector("input")?.focus(), 120);
+        };
+        const buildMailLinks = (subject, body) => ({
+          gmailUrl: `https://mail.google.com/mail/?view=cm&fs=1&to=info@kobiai.com.tr&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+          yahooUrl: `https://compose.mail.yahoo.com/?to=info@kobiai.com.tr&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
+          mailtoUrl: `mailto:info@kobiai.com.tr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+        });
         const parseBotReply = async (response) => {
           const contentType = response.headers.get("content-type") || "";
           if (contentType.includes("application/json")) {
@@ -175,6 +226,15 @@ const isStaging = new URL(Astro.site ?? Astro.url.origin).hostname === "test.per
           setOpen(!panel?.classList.contains("is-open"));
         });
         close?.addEventListener("click", () => setOpen(false));
+        contactOpeners.forEach((opener) => {
+          opener.addEventListener("click", (event) => {
+            event.preventDefault();
+            setContactOpen(true);
+          });
+        });
+        contactClosers.forEach((closer) => {
+          closer.addEventListener("click", () => setContactOpen(false));
+        });
         document.querySelectorAll("[data-chat-prompt]").forEach((button) => {
           button.addEventListener("click", () => {
             const text = button.getAttribute("data-chat-prompt") || "";
@@ -203,17 +263,18 @@ const isStaging = new URL(Astro.site ?? Astro.url.origin).hostname === "test.per
             `Mesaj: ${data.get("message") || "-"}`
           ].join("\n");
           const subject = "Kobi AI Demo Talebi";
-          const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=info@kobiai.com.tr&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-          const yahooUrl = `https://compose.mail.yahoo.com/?to=info@kobiai.com.tr&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-          const mailtoUrl = `mailto:info@kobiai.com.tr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          const { gmailUrl, yahooUrl, mailtoUrl } = buildMailLinks(subject, body);
+          const opened = window.open(gmailUrl, "_blank");
+          if (opened) opened.opener = null;
+          if (!opened) window.location.href = mailtoUrl;
           formStatus.innerHTML = `
-            <span>Gönderim için tercih ettiğiniz servisi açın:</span>
-            <a href="${gmailUrl}" target="_blank" rel="noreferrer">Gmail</a>
+            <span>Mesajınız hazırlandı. Gmail yeni sekmede açıldı; açılmadıysa aşağıdaki alternatifleri kullanabilirsiniz.</span>
             <a href="${yahooUrl}" target="_blank" rel="noreferrer">Yahoo</a>
             <a href="${mailtoUrl}">Mail uygulaması</a>
           `;
         });
         document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") setContactOpen(false);
           if (event.key === "Escape") setOpen(false);
         });
       });
