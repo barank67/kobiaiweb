@@ -16,3 +16,7 @@ pnpm build
 ```
 
 Build çıktısı `dist/` klasörüne üretilir.
+
+## Icerik Ekleme
+
+Blog ve basin yazisi ekleme kurallari icin [CONTENT_GUIDE.md](./CONTENT_GUIDE.md) dosyasini kullanin.
