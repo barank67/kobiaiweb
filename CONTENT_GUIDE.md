@@ -51,7 +51,10 @@ seoDescription: ""
 ## Dil ve Yazi Kontrolu
 
 - Icerik siteye alinmadan once Turkce imla, harf ve karakter kodlama hatalari kontrol edilir.
+- Markdown dosyalari UTF-8 olarak kaydedilmelidir.
+- Word, Google Docs veya web sayfasindan kopyalanan metin once duz metin/Markdown olarak kontrol edilir.
 - Bozuk karakterler (`KOBÄ°`, `Ã§`, `ÅŸ`, `Ä±` gibi) varsa icerik yayinlanmadan once duzeltilir.
+- Karakter uyusmazligi gorulurse kaynak dosya korunur; yayinlanacak kopya UTF-8 ve Turkce karakterler duzgun olacak sekilde duzeltilir.
 - Marka yazimlari tutarli hale getirilir: metin icinde mevcut site standardi korunur, SEO basliginda `Kobi ai` kullanilir.
 - Bariz yazim hatalari duzeltilir; anlam degistirebilecek duzeltmeler kullaniciya sorulur.
 
