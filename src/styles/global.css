@@ -1465,9 +1465,18 @@ img {
 }
 
 .contact-form-wide,
+.form-honeypot,
 .contact-form button,
 .form-status {
   grid-column: 1 / -1;
+}
+
+.form-honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 .contact-form input,

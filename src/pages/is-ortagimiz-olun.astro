@@ -23,6 +23,9 @@ const serviceOptions = [
   "Üretim Planlama",
   "Yapay Zeka Danışmanlığı"
 ];
+
+const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? "";
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
 ---
 <BaseLayout
   title="İş Ortağımız Olun | Kobi AI"
@@ -109,21 +112,27 @@ const serviceOptions = [
         <span>Mesajınız</span>
         <textarea name="message" rows="5" maxlength="180"></textarea>
       </label>
+      <label class="form-honeypot" aria-hidden="true">
+        <span>Website</span>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" />
+      </label>
+      {turnstileSiteKey && <div class="cf-turnstile partner-form-wide" data-sitekey={turnstileSiteKey}></div>}
       <button class="button primary" type="submit">Gönder</button>
       <p class="partner-form-status" aria-live="polite"></p>
     </form>
   </section>
 
-  <script is:inline>
+  <script define:vars={{ publicContactEndpoint: contactEndpoint, publicTurnstileSiteKey: turnstileSiteKey }}>
     document.addEventListener("DOMContentLoaded", () => {
       const form = document.querySelector("#partner-form");
       const status = document.querySelector(".partner-form-status");
-
-      form?.addEventListener("submit", (event) => {
-        event.preventDefault();
-        if (!form.reportValidity()) return;
-
-        const data = new FormData(form);
+      const contactEndpoint = publicContactEndpoint;
+      const turnstileSiteKey = publicTurnstileSiteKey;
+      const resetTurnstile = () => {
+        const widget = form?.querySelector(".cf-turnstile");
+        if (window.turnstile && widget) window.turnstile.reset(widget);
+      };
+      const openMailFallback = (data) => {
         const body = [
           `Ad Soyad: ${data.get("name")}`,
           `Firma: ${data.get("company") || "-"}`,
@@ -140,12 +149,53 @@ const serviceOptions = [
         const opened = window.open(gmailUrl, "_blank");
         if (opened) opened.opener = null;
         if (!opened) window.location.href = mailtoUrl;
-
         status.innerHTML = `
           <span>Başvurunuz hazırlandı. Gmail yeni sekmede açıldı; açılmadıysa aşağıdaki alternatifleri kullanabilirsiniz.</span>
           <a href="${yahooUrl}" target="_blank" rel="noreferrer">Yahoo</a>
           <a href="${mailtoUrl}">Mail uygulaması</a>
         `;
+      };
+
+      form?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+        const data = new FormData(form);
+        if (!contactEndpoint || !turnstileSiteKey) {
+          openMailFallback(data);
+          return;
+        }
+
+        const turnstileToken = data.get("cf-turnstile-response");
+        if (!turnstileToken) {
+          status.textContent = "Güvenlik doğrulaması tamamlanamadı. Lütfen tekrar deneyin.";
+          return;
+        }
+        status.textContent = "Gönderiliyor...";
+        try {
+          const response = await fetch(contactEndpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              formType: "İş Ortaklığı Başvurusu",
+              name: data.get("name") || "",
+              company: data.get("company") || "",
+              phone: data.get("phone") || "",
+              email: data.get("email") || "",
+              service: data.get("service") || "",
+              message: data.get("message") || "",
+              website: data.get("website") || "",
+              turnstileToken,
+              page: window.location.href
+            })
+          });
+          if (!response.ok) throw new Error("form_failed");
+          status.textContent = "Başvurunuz alındı. En kısa sürede sizinle iletişime geçeceğiz.";
+          form.reset();
+          resetTurnstile();
+        } catch (error) {
+          status.textContent = "Başvuru gönderilemedi. Lütfen biraz sonra tekrar deneyin veya info@kobiai.com.tr adresine yazın.";
+          resetTurnstile();
+        }
       });
     });
   </script>
