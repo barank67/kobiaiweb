@@ -1,5 +1,41 @@
 [
   {
+    "id": 3004,
+    "title": "Şirketlerin Tercihi Hızlı Öğrenenler (Akşam Gazetesi 27.06.2026)",
+    "slug": "sirketlerin-tercihi-hizli-ogrenenler",
+    "date": "2026-06-27",
+    "excerpt": "Yapay zekâ dünyasında işe alım kriterleri değişiyor; şirketler artık bilgiyi uygulayabilen ve hızlı öğrenen adayları tercih ediyor.",
+    "image": "/assets/wp/2026/06/sirketlerin-tercihi-hizli-ogrenenler.webp",
+    "seoTitle": "Şirketlerin Tercihi Hızlı Öğrenenler (Akşam Gazetesi 27.06.2026)",
+    "seoDescription": "İş dünyasında yetenek ihtiyacı yapay zekâ, veri analitiği ve otomasyon alanlarında yoğunlaşıyor; hızlı öğrenen adaylar öne çıkıyor.",
+    "content": "Yapay zekâ dünyasında işe alım kriterleri değişiyor. Şirketler artık bilgiyi uygulayabilen adayları tercih ediyor.\n\nKobi AI kurucusu Baran Kaya, iş dünyasında yetenek ihtiyacının özellikle yapay zekâ, veri analitiği ve otomasyon alanlarında belirginleştiğini belirterek, \"Artık şirketler için temel soru 'Ne biliyorsun?' değil, 'Ne kadar hızlı öğrenebiliyorsun?' haline geldi. Önemli olan bilgiyi bir probleme uygulayıp sonuç üretebilmek.\" dedi.",
+    "terms": [
+      {
+        "taxonomy": "category",
+        "name": "Basında Biz",
+        "slug": "basinda-biz"
+      }
+    ]
+  },
+  {
+    "id": 3003,
+    "title": "KOBİ'lerin Yeni Çalışanı Yapay Zeka Olacak (Hürriyet Gazetesi 27.06.2026)",
+    "slug": "kobilerin-yeni-calisani-yapay-zeka-olacak",
+    "date": "2026-06-27",
+    "excerpt": "Yapay zeka dijital ekip arkadaşına dönüşüyor. Birkaç kişi büyük cirolar yönetebilir hale geliyor.",
+    "image": "/assets/wp/2026/06/kobilerin-yeni-calisani-yapay-zeka-olacak.webp",
+    "seoTitle": "KOBİ'lerin Yeni Çalışanı Yapay Zeka Olacak (Hürriyet Gazetesi 27.06.2026)",
+    "seoDescription": "Yapay zeka dijital ekip arkadaşına dönüşüyor. Birkaç kişi büyük cirolar yönetebilir, kurum hafızası korunur, hizmet kalitesi sürdürülebilir hale geliyor.",
+    "content": "Yapay zekânın asistanlıktan çıkıp dijital ekip arkadaşına dönüştüğünü söyleyen Kobi AI kurucusu Baran Kaya, \"KOBİ'lerin yeni çalışanı yapay zekâ olacak. Önümüzdeki yıllarda birkaç kişilik ekiplerle milyonlarca liralık ciro yöneten şirketler yaygınlaşacak\" dedi.\n\nKOBİ'lerin yıllardır mücadele ettiği çalışan sirkülasyonu ve verimlilik sorunları, yapay zekâ ile farklı bir boyuta taşınıyor. Yeni nesil teknolojiler, kurum hafızasının korunmasını ve hizmet kalitesinin sürdürülebilir hale gelmesini sağlıyor...",
+    "terms": [
+      {
+        "taxonomy": "category",
+        "name": "Basında Biz",
+        "slug": "basinda-biz"
+      }
+    ]
+  },
+  {
     "id": 3002,
     "title": "İŞLETMELERE ÇÖP VERİ UYARISI (Hürriyet Gazetesi 01.06.2026)",
     "slug": "isletmelere-cop-veri-uyarisi-yapay-zekada-veri-temizligi",
