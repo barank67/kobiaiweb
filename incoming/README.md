@@ -15,3 +15,4 @@ Kurallar:
 - Gorsel `.webp` degilse siteye eklenirken `.webp` formatina cevrilir.
 - Frontmatter kurallari icin `../CONTENT_GUIDE.md` dosyasini kullanin.
 - Icerik siteye eklendikten sonra bu klasorden asil data/assets klasorlerine tasinir.
+- Basariyla islenen kaynaklar `processed/slug-tarih/` altina, yayinlanamayacak durumdaki kaynaklar `rejected/slug-tarih/` altina ayrilir.

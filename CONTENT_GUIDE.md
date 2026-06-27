@@ -37,6 +37,9 @@ seoDescription: ""
 - `type: press` ise icerik Basinda Biz bolumune eklenir.
 - `type: press` icin `category` bos birakildiysa `Basinda Biz` yapilir.
 - `type: blog` icin `category` bos birakildiysa `Blog` yapilir.
+- `type: press` olan iceriklerde baslikta `Hurriyet` veya `Hürriyet` geciyorsa Basinda Biz listesinde Hurriyet haberleri grubunda gosterilir.
+- Hurriyet haberleri kendi icinde en yeni tarih once olacak sekilde siralanir; yeni Hurriyet haberi bu nedenle en basa gelir.
+- `type: press` olan ve basliginda Hurriyet gecmeyen yeni icerikler Hurriyet haberlerinin arkasina, kendi tarih sirasina gore eklenir.
 - `description` kartlarda ve liste sayfalarinda kullanilan kisa ozettir.
 - `seoTitle` bos birakildiysa otomatik olarak `title + " - Kobi ai"` yapilir.
 - Marka yazimi SEO basliginda `Kobi ai` olarak kullanilir.
@@ -45,6 +48,13 @@ seoDescription: ""
 - `seoDescription` hedef uzunlugu 140-160 karakterdir.
 - `sourceUrl` sadece dis kaynakta yayinlanan basin/haber yazilari icin doldurulur.
 
+## Dil ve Yazi Kontrolu
+
+- Icerik siteye alinmadan once Turkce imla, harf ve karakter kodlama hatalari kontrol edilir.
+- Bozuk karakterler (`KOBÄ°`, `Ã§`, `ÅŸ`, `Ä±` gibi) varsa icerik yayinlanmadan once duzeltilir.
+- Marka yazimlari tutarli hale getirilir: metin icinde mevcut site standardi korunur, SEO basliginda `Kobi ai` kullanilir.
+- Bariz yazim hatalari duzeltilir; anlam degistirebilecek duzeltmeler kullaniciya sorulur.
+
 ## Gorsel Kurallari
 
 - JPEG, PNG veya AVIF gorsel verilebilir.
@@ -52,6 +62,13 @@ seoDescription: ""
 - Gorsel `.webp` degilse `.webp` formatina cevrilir.
 - Gorsel dosya adi `slug` ile ayni tutulur.
 - Orijinal gorsel cok buyukse web icin optimize edilir.
+
+## Incoming Isleme Kurali
+
+- Yeni dosyalar once `incoming/` klasorune kopyalanir.
+- Icerik siteye basariyla eklendikten sonra kaynak `.md` ve gorsel `incoming/processed/slug-tarih/` altina tasinir.
+- Karakter kodlama, eksik gorsel, eksik slug veya benzeri nedenle yayinlanamayacak dosyalar `incoming/rejected/slug-tarih/` altina tasinir ya da duzeltilene kadar `incoming/` icinde birakilir.
+- Ayni slug ile yeni dosya geldiginde karismamasi icin islenen dosyalar `incoming/` kokunde tutulmaz.
 
 ## Link Kurallari
 
