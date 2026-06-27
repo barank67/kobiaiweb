@@ -209,34 +209,9 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
           const widget = form?.querySelector(".cf-turnstile");
           if (window.turnstile && widget) window.turnstile.reset(widget);
         };
-        const openMailFallback = (subject, body, status) => {
-          const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=info@kobiai.com.tr&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-          const yahooUrl = `https://compose.mail.yahoo.com/?to=info@kobiai.com.tr&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-          const mailtoUrl = `mailto:info@kobiai.com.tr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-          const opened = window.open(gmailUrl, "_blank");
-          if (opened) opened.opener = null;
-          if (!opened) window.location.href = mailtoUrl;
-          status.innerHTML = `
-            <span>Mesajınız hazırlandı. Gmail yeni sekmede açıldı; açılmadıysa aşağıdaki alternatifleri kullanabilirsiniz.</span>
-            <a href="${yahooUrl}" target="_blank" rel="noreferrer">Yahoo</a>
-            <a href="${mailtoUrl}">Mail uygulaması</a>
-          `;
-        };
         const submitContactForm = async (form, status, formType) => {
           if (!contactEndpoint || !turnstileSiteKey) {
-            const data = new FormData(form);
-            openMailFallback(
-              "Kobi AI Demo Talebi",
-              [
-                `Ad Soyad: ${data.get("name")}`,
-                `Firma: ${data.get("company") || "-"}`,
-                `Telefon: ${data.get("phone")}`,
-                `Email: ${data.get("email")}`,
-                "",
-                `Mesaj: ${data.get("message") || "-"}`
-              ].join("\n"),
-              status
-            );
+            status.textContent = "Form servisi henüz yapılandırılmamış. Lütfen daha sonra tekrar deneyin.";
             return;
           }
           const data = new FormData(form);

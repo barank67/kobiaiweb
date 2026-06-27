@@ -132,36 +132,12 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
         const widget = form?.querySelector(".cf-turnstile");
         if (window.turnstile && widget) window.turnstile.reset(widget);
       };
-      const openMailFallback = (data) => {
-        const body = [
-          `Ad Soyad: ${data.get("name")}`,
-          `Firma: ${data.get("company") || "-"}`,
-          `Telefon: ${data.get("phone")}`,
-          `Email: ${data.get("email")}`,
-          `Hizmet: ${data.get("service") || "-"}`,
-          "",
-          `Mesaj: ${data.get("message") || "-"}`
-        ].join("\n");
-        const subject = "Kobi AI İş Ortaklığı Başvurusu";
-        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=info@kobiai.com.tr&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        const yahooUrl = `https://compose.mail.yahoo.com/?to=info@kobiai.com.tr&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        const mailtoUrl = `mailto:info@kobiai.com.tr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        const opened = window.open(gmailUrl, "_blank");
-        if (opened) opened.opener = null;
-        if (!opened) window.location.href = mailtoUrl;
-        status.innerHTML = `
-          <span>Başvurunuz hazırlandı. Gmail yeni sekmede açıldı; açılmadıysa aşağıdaki alternatifleri kullanabilirsiniz.</span>
-          <a href="${yahooUrl}" target="_blank" rel="noreferrer">Yahoo</a>
-          <a href="${mailtoUrl}">Mail uygulaması</a>
-        `;
-      };
-
       form?.addEventListener("submit", async (event) => {
         event.preventDefault();
         if (!form.reportValidity()) return;
         const data = new FormData(form);
         if (!contactEndpoint || !turnstileSiteKey) {
-          openMailFallback(data);
+          status.textContent = "Form servisi henüz yapılandırılmamış. Lütfen daha sonra tekrar deneyin.";
           return;
         }
 
