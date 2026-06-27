@@ -114,7 +114,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
         decoding="async"
       />
     </button>
-    <section class="contact-modal" id="iletisim-formu" aria-hidden="true">
+    <section class="contact-modal" id="iletisim-formu" hidden inert>
       <div class="contact-modal-backdrop" data-contact-close></div>
       <div class="contact-dialog" role="dialog" aria-modal="true" aria-labelledby="contact-dialog-title">
         <button class="contact-close" type="button" aria-label="İletişim formunu kapat" data-contact-close>×</button>
@@ -156,7 +156,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
         </form>
       </div>
     </section>
-    <section class="chatbot-panel" aria-live="polite" aria-hidden="true">
+    <section class="chatbot-panel" aria-live="polite" hidden inert>
       <div class="chatbot-head">
         <strong>Kobi AI Asistan</strong>
         <button type="button" aria-label="Chatbot'u kapat">×</button>
@@ -241,8 +241,10 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
         };
         const sessionId = getSessionId();
         const setOpen = (open) => {
+          if (open) panel?.removeAttribute("hidden");
           panel?.classList.toggle("is-open", open);
-          panel?.setAttribute("aria-hidden", open ? "false" : "true");
+          panel?.toggleAttribute("inert", !open);
+          if (!open) panel?.setAttribute("hidden", "");
           toggle?.setAttribute("aria-expanded", open ? "true" : "false");
           if (open) window.setTimeout(() => chatInput?.focus(), 120);
         };
@@ -256,8 +258,10 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
           return item;
         };
         const setContactOpen = (open) => {
+          if (open) contactModal?.removeAttribute("hidden");
           contactModal?.classList.toggle("is-open", open);
-          contactModal?.setAttribute("aria-hidden", open ? "false" : "true");
+          contactModal?.toggleAttribute("inert", !open);
+          if (!open) contactModal?.setAttribute("hidden", "");
           document.body.classList.toggle("has-modal", open);
           if (open) {
             renderTurnstiles(contactModal);
