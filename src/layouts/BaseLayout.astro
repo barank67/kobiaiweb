@@ -35,12 +35,18 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
     <meta name="twitter:image" content={imageUrl} />
     <title>{title}</title>
     <link rel="icon" href="/favicon.png" />
-    {turnstileSiteKey && <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
   </head>
   <body>
     <header class="site-header">
       <a class="brand" href="/" aria-label="Kobi AI ana sayfa">
-        <img class="brand-logo" src="/assets/images/kobiai-logo-main.png" alt="Kobi AI" />
+        <img
+          class="brand-logo"
+          src="/assets/images/kobiai-logo-main.png"
+          alt="Kobi AI"
+          width="520"
+          height="248"
+          decoding="async"
+        />
       </a>
       <nav class="main-nav" aria-label="Ana menü">
         {navItems.map((item) => (
@@ -65,13 +71,21 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
       <div class="footer-main">
       <div class="footer-column footer-about">
         <a class="brand footer-brand" href="/">
-          <img class="brand-logo" src="/assets/images/kobiai-logo-white.png" alt="Kobi AI" />
+          <img
+            class="brand-logo"
+            src="/assets/images/kobiai-logo-white.png"
+            alt="Kobi AI"
+            width="520"
+            height="248"
+            loading="lazy"
+            decoding="async"
+          />
         </a>
         <p>Otonom AI ekipleri ve akıllı iş akışları.</p>
         <div class="social-links">
           {socials.map((item) => (
             <a href={item.href} target="_blank" rel="noreferrer" aria-label={item.label}>
-              <img src={item.icon} alt="" />
+              <img src={item.icon} alt="" width="18" height="18" loading="lazy" decoding="async" />
               <span>{item.label}</span>
             </a>
           ))}
@@ -92,7 +106,13 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
       <p class="footer-copy">Kobi AI 2026 © Tüm Hakları Saklıdır.</p>
     </footer>
     <button class="chatbot-toggle" type="button" aria-label="Chatbot'u aç" aria-expanded="false">
-      <img src="/assets/images/kobi-ai-chatbot-icon.png" alt="" />
+      <img
+        src="/assets/images/kobi-ai-chatbot-icon.png"
+        alt=""
+        width="206"
+        height="206"
+        decoding="async"
+      />
     </button>
     <section class="contact-modal" id="iletisim-formu" aria-hidden="true">
       <div class="contact-modal-backdrop" data-contact-close></div>
@@ -157,6 +177,44 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
       </div>
     </section>
     <script define:vars={{ publicContactEndpoint: contactEndpoint, publicTurnstileSiteKey: turnstileSiteKey }}>
+      const turnstileScriptSrc = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      let turnstilePromise;
+      const loadTurnstile = () => {
+        if (!publicTurnstileSiteKey || window.turnstile) return Promise.resolve();
+        if (turnstilePromise) return turnstilePromise;
+        turnstilePromise = new Promise((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src = turnstileScriptSrc;
+          script.async = true;
+          script.defer = true;
+          script.dataset.turnstileLoader = "true";
+          script.onload = () => resolve();
+          script.onerror = reject;
+          document.head.appendChild(script);
+        });
+        return turnstilePromise;
+      };
+      const renderTurnstiles = async (root = document) => {
+        const widgets = root ? Array.from(root.querySelectorAll?.(".cf-turnstile") || []) : [];
+        if (!widgets.length) return;
+        await loadTurnstile();
+        if (!window.turnstile?.render) return;
+        widgets.forEach((widget) => {
+          if (widget.getAttribute("data-turnstile-widget-id")) return;
+          const sitekey = widget.getAttribute("data-sitekey");
+          if (!sitekey) return;
+          const widgetId = window.turnstile.render(widget, { sitekey });
+          widget.setAttribute("data-turnstile-widget-id", widgetId);
+        });
+      };
+      const resetTurnstileWidget = (form) => {
+        const widget = form?.querySelector(".cf-turnstile");
+        const widgetId = widget?.getAttribute("data-turnstile-widget-id");
+        if (window.turnstile && widgetId) window.turnstile.reset(widgetId);
+      };
+      window.kobiaiRenderTurnstiles = renderTurnstiles;
+      window.kobiaiResetTurnstile = resetTurnstileWidget;
+
       document.addEventListener("DOMContentLoaded", () => {
         const toggle = document.querySelector(".chatbot-toggle");
         const panel = document.querySelector(".chatbot-panel");
@@ -201,11 +259,13 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
           contactModal?.classList.toggle("is-open", open);
           contactModal?.setAttribute("aria-hidden", open ? "false" : "true");
           document.body.classList.toggle("has-modal", open);
-          if (open) window.setTimeout(() => demoForm?.querySelector("input")?.focus(), 120);
+          if (open) {
+            renderTurnstiles(contactModal);
+            window.setTimeout(() => demoForm?.querySelector("input")?.focus(), 120);
+          }
         };
         const resetTurnstile = (form) => {
-          const widget = form?.querySelector(".cf-turnstile");
-          if (window.turnstile && widget) window.turnstile.reset(widget);
+          resetTurnstileWidget(form);
         };
         const submitContactForm = async (form, status, formType) => {
           if (!contactEndpoint || !turnstileSiteKey) {

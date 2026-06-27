@@ -56,7 +56,10 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
       <img
         src="/assets/wp/2026/01/Kurumsal_Is_Ortagimiz_Olun-1-scaled.avif"
         alt="Kobi AI iş ortaklığı"
-        loading="eager"
+        width="2560"
+        height="1707"
+        loading="lazy"
+        decoding="async"
       />
     </figure>
   </section>
@@ -128,19 +131,34 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? "";
       const status = document.querySelector(".partner-form-status");
       const contactEndpoint = publicContactEndpoint;
       const turnstileSiteKey = publicTurnstileSiteKey;
+      const prepareTurnstile = () => window.kobiaiRenderTurnstiles?.(form) || Promise.resolve();
       const resetTurnstile = () => {
-        const widget = form?.querySelector(".cf-turnstile");
-        if (window.turnstile && widget) window.turnstile.reset(widget);
+        window.kobiaiResetTurnstile?.(form);
       };
+      if (turnstileSiteKey && form) {
+        form.addEventListener("focusin", prepareTurnstile, { once: true });
+        form.addEventListener("pointerenter", prepareTurnstile, { once: true });
+        if ("IntersectionObserver" in window) {
+          const observer = new IntersectionObserver((entries) => {
+            if (!entries.some((entry) => entry.isIntersecting)) return;
+            prepareTurnstile();
+            observer.disconnect();
+          }, { rootMargin: "240px" });
+          observer.observe(form);
+        } else {
+          window.setTimeout(prepareTurnstile, 2000);
+        }
+      }
       form?.addEventListener("submit", async (event) => {
         event.preventDefault();
         if (!form.reportValidity()) return;
-        const data = new FormData(form);
         if (!contactEndpoint || !turnstileSiteKey) {
           status.textContent = "Form servisi henüz yapılandırılmamış. Lütfen daha sonra tekrar deneyin.";
           return;
         }
 
+        await prepareTurnstile();
+        const data = new FormData(form);
         const turnstileToken = data.get("cf-turnstile-response");
         if (!turnstileToken) {
           status.textContent = "Güvenlik doğrulaması tamamlanamadı. Lütfen tekrar deneyin.";

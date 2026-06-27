@@ -754,8 +754,11 @@ img {
 }
 
 .home-blog-track {
+  --blog-offset: 0px;
+  --blog-step: calc((100% - 36px) / 3 + 18px);
   display: flex;
   gap: 18px;
+  transform: translateX(var(--blog-offset));
   transition: transform 0.55s ease;
   will-change: transform;
 }
@@ -1698,6 +1701,10 @@ img {
     flex-basis: calc((100% - 18px) / 2);
   }
 
+  .home-blog-track {
+    --blog-step: calc((100% - 18px) / 2 + 18px);
+  }
+
   .discovery-grid,
   .footer-main {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1802,6 +1809,10 @@ img {
 
   .home-blog-card {
     flex-basis: 100%;
+  }
+
+  .home-blog-track {
+    --blog-step: calc(100% + 18px);
   }
 
   .solution-card,

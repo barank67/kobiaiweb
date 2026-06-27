@@ -20,7 +20,15 @@ const questionColumns = [yesQuestions.slice(0, 8), yesQuestions.slice(8)];
       </div>
     </div>
     <div class="hero-visual" aria-label="Agentic AI ajan ağı">
-      <img src="/assets/images/agentic-ai-bg.webp" alt="" loading="eager" />
+      <img
+        src="/assets/images/agentic-ai-bg.webp"
+        alt=""
+        width="1672"
+        height="941"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
       <div class="agent-core">Agentic AI</div>
       {agents.map((agent, index) => <span class={`agent-node node-${index + 1}`}>{agent}</span>)}
     </div>
@@ -65,7 +73,10 @@ const questionColumns = [yesQuestions.slice(0, 8), yesQuestions.slice(8)];
       <img
         src="/assets/wp/2025/11/ChatGPT-Image-24-Eki-2025-17_53_31-683x1024.avif"
         alt="Kobi AI yapay zeka asistanı görseli"
-        loading="eager"
+        width="683"
+        height="1024"
+        loading="lazy"
+        decoding="async"
       />
     </figure>
     <div class="why-content">
@@ -140,7 +151,14 @@ const questionColumns = [yesQuestions.slice(0, 8), yesQuestions.slice(8)];
             <strong>{item.name}</strong>
             <small>{item.role}</small>
           </div>
-          <img src="/assets/images/kobiai-logo-main.png" alt="Kobi AI" loading="eager" />
+          <img
+            src="/assets/images/kobiai-logo-main.png"
+            alt="Kobi AI"
+            width="520"
+            height="248"
+            loading="lazy"
+            decoding="async"
+          />
         </article>
       ))}
     </div>
@@ -156,7 +174,14 @@ const questionColumns = [yesQuestions.slice(0, 8), yesQuestions.slice(8)];
         {homeBlogPosts.map((post) => (
           <a class="blog-card home-blog-card" href={`/blog/${post.slug}/`}>
             <figure>
-              <img src={post.image || fallbackBlogImage} alt={post.title} loading="eager" />
+              <img
+                src={post.image || fallbackBlogImage}
+                alt={post.title}
+                width="640"
+                height="400"
+                loading="lazy"
+                decoding="async"
+              />
             </figure>
             <div>
               <h3>{post.title}</h3>
@@ -211,9 +236,7 @@ const questionColumns = [yesQuestions.slice(0, 8), yesQuestions.slice(8)];
       if (!blogTrack || blogCards.length <= visibleBlogCards()) return;
       const maxIndex = Math.max(0, blogCards.length - visibleBlogCards());
       blogIndex = blogIndex > maxIndex ? 0 : blogIndex;
-      const cardWidth = blogCards[0].getBoundingClientRect().width;
-      const gap = Number.parseFloat(window.getComputedStyle(blogTrack).columnGap || "0");
-      blogTrack.style.transform = `translateX(-${blogIndex * (cardWidth + gap)}px)`;
+      blogTrack.style.setProperty("--blog-offset", `calc(0px${" - var(--blog-step)".repeat(blogIndex)})`);
     };
     if (blogCards.length > 3) {
       showBlogSlide();

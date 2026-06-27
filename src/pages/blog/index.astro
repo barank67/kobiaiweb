@@ -17,7 +17,14 @@ const totalPages = Math.ceil(allBlogPosts.length / postsPerPage);
       {pagePosts.map((post) => (
         <a class="blog-card lift-card" href={`/blog/${post.slug}/`}>
           <figure>
-            <img src={post.image || fallbackBlogImage} alt={post.title} loading="eager" />
+            <img
+              src={post.image || fallbackBlogImage}
+              alt={post.title}
+              width="640"
+              height="400"
+              loading="lazy"
+              decoding="async"
+            />
           </figure>
           <div>
             <h2>{post.title}</h2>
