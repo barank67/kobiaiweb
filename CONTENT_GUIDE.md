@@ -9,9 +9,10 @@ Yeni icerikler tercihen Markdown olarak teslim edilir:
 ```text
 yazi-slug.md
 yazi-slug.jpg
+yazi-slug-ara-gorsel-1.jpg
 ```
 
-Gorsel dosyasi `.webp` degilse siteye eklenirken `.webp` formatina cevrilir. Gorsel dosya adi mumkunse `slug` ile ayni olmalidir.
+Gorsel dosyasi `.webp` degilse siteye eklenirken `.webp` formatina cevrilir. Ana gorsel dosya adi mumkunse `slug` ile ayni olmalidir.
 
 ## Frontmatter
 
@@ -63,8 +64,22 @@ seoDescription: ""
 - JPEG, PNG veya AVIF gorsel verilebilir.
 - Siteye eklenirken tercih edilen format `.webp`tir.
 - Gorsel `.webp` degilse `.webp` formatina cevrilir.
-- Gorsel dosya adi `slug` ile ayni tutulur.
+- Frontmatter icindeki `image` ana gorseldir; kartlarda, liste sayfalarinda ve yazinin ust gorselinde kullanilir.
+- Ana gorsel dosya adi `slug` ile ayni tutulur.
 - Orijinal gorsel cok buyukse web icin optimize edilir.
+- Ana gorsel disinda ikinci veya ara gorsel varsa dosya adi `slug` ile baslamali ve amaci/sirasi net olmalidir: `yazi-slug-ara-gorsel-1.jpg`, `yazi-slug-ekran-goruntusu.jpg`.
+- Ara gorselin yazida nerede kullanilacagi, Markdown icinde normal gorsel satiriyla belirtilir. Gorsel satiri nereye konursa yayinlanan yazida da o noktaya yerlestirilir:
+
+```md
+![Kisa ve aciklayici alt metin](./yazi-slug-ara-gorsel-1.jpg)
+```
+
+- Gorsel sadece bilgi olarak veriliyor ve tam konumu metinden anlasilmiyorsa, gorsel satirindan once kisa bir not eklenir:
+
+```md
+<!-- gorsel-konum: "Maliyet Tasarrufu" basligindan sonra -->
+![Maliyet tasarrufu sureci](./yazi-slug-ara-gorsel-1.jpg)
+```
 
 ## Incoming Isleme Kurali
 
@@ -82,6 +97,15 @@ Markdown icinde link kullanilabilir:
 ```
 
 Site ici linklerde mumkunse tam canli URL veya kokten baslayan path kullanilir.
+
+Ayni anda gonderilen ve birbirine link veren birden fazla yazi varsa, henuz yayinda olmasa bile planlanan nihai slug kullanilir. Tercih edilen format kokten baslayan path'tir:
+
+```md
+[Ilgili yazi basligi](/blog/ilgili-yazi-slug/)
+[Basin yazisi basligi](/basinda-biz/ilgili-basin-yazisi-slug/)
+```
+
+Slug kesin degilse gecici link yazmak yerine hedef yazinin basligi not edilir; yayinlamadan once kesin slug ile link tamamlanir.
 
 ## Ornek: Basin Yazisi
 

@@ -10,6 +10,7 @@ export type PressPost = {
   seoTitle: string;
   seoDescription: string;
   content: string;
+  contentHtml?: string;
 };
 
 const pressPosts = generatedPress as PressPost[];
