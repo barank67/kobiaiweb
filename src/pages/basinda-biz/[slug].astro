@@ -43,6 +43,11 @@ const jsonLd = {
     ) : (
       post.content.split(/\n+/).filter(Boolean).map((paragraph) => <p>{paragraph}</p>)
     )}
+    {post.sourceUrl && (
+      <p class="source-link">
+        <a href={post.sourceUrl} target="_blank" rel="noopener noreferrer">Haberi kaynağında oku</a>
+      </p>
+    )}
   </article>
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 </BaseLayout>

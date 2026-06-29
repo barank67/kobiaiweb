@@ -424,6 +424,21 @@ img {
   font-weight: 700;
 }
 
+.source-link {
+  margin-top: 34px;
+}
+
+.source-link a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  padding: 0 16px;
+  border: 1px solid var(--red);
+  border-radius: 8px;
+  color: var(--red);
+  font-weight: 800;
+}
+
 .solution-card strong {
   display: inline-flex;
   margin-top: 22px;
