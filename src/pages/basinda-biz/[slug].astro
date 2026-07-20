@@ -8,6 +8,7 @@ export function getStaticPaths() {
 
 const { post } = Astro.props;
 const image = post.image || fallbackPressImage;
+const isDirectVideo = post.videoUrl && /\.(mp4|webm|ogg)(?:$|\?)/i.test(post.videoUrl);
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "NewsArticle",
@@ -59,7 +60,12 @@ const jsonLd = {
         Tarayıcınız ses oynatmayı desteklemiyor.
       </audio>
     )}
-    {post.videoUrl && !post.embedUrl && (
+    {isDirectVideo && (
+      <video class="article-video" controls src={post.videoUrl} poster={image}>
+        Tarayıcınız video oynatmayı desteklemiyor.
+      </video>
+    )}
+    {post.videoUrl && !post.embedUrl && !isDirectVideo && (
       <p class="source-link">
         <a href={post.videoUrl} target="_blank" rel="noopener noreferrer">Yayını izle</a>
       </p>
