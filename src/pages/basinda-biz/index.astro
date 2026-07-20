@@ -6,13 +6,13 @@ const pagePosts = allPressPosts.slice(0, pressPerPage);
 const totalPages = Math.ceil(allPressPosts.length / pressPerPage);
 ---
 <BaseLayout
-  title="Basında Biz - Kobi ai"
-  description="Kobi AI hakkında basında çıkan haberler, duyurular ve yayınlar."
+  title="Yazılı Basın - Basında Biz - Kobi ai"
+  description="Kobi AI hakkında yazılı basında çıkan haberler ve yayınlar."
 >
   <section class="page-hero light-page-hero">
     <div class="reveal-box">
       <p>Basında Biz</p>
-      <h1>Kobi AI haberleri ve yayınları</h1>
+      <h1>Kobi AI yazılı basın haberleri</h1>
     </div>
   </section>
   <section class="section blog-listing">
@@ -36,7 +36,7 @@ const totalPages = Math.ceil(allPressPosts.length / pressPerPage);
         </a>
       ))}
     </div>
-    <nav class="pagination" aria-label="Basında Biz sayfaları">
+    <nav class="pagination" aria-label="Yazılı Basın sayfaları">
       <span class="is-current">1</span>
       {Array.from({ length: totalPages - 1 }, (_, index) => (
         <a href={`/basinda-biz/page/${index + 2}/`}>{index + 2}</a>

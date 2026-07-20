@@ -1,9 +1,9 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { allPressPosts, fallbackPressImage } from "../../data/press";
+import { allPressItems, fallbackPressImage } from "../../data/press";
 
 export function getStaticPaths() {
-  return allPressPosts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+  return allPressItems.map((post) => ({ params: { slug: post.slug }, props: { post } }));
 }
 
 const { post } = Astro.props;
@@ -42,6 +42,27 @@ const jsonLd = {
       <div class="article-html" set:html={post.contentHtml} />
     ) : (
       post.content.split(/\n+/).filter(Boolean).map((paragraph) => <p>{paragraph}</p>)
+    )}
+    {post.embedUrl && (
+      <div class="media-embed">
+        <iframe
+          src={post.embedUrl}
+          title={post.title}
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        />
+      </div>
+    )}
+    {post.audioUrl && (
+      <audio class="article-audio" controls src={post.audioUrl}>
+        Tarayıcınız ses oynatmayı desteklemiyor.
+      </audio>
+    )}
+    {post.videoUrl && !post.embedUrl && (
+      <p class="source-link">
+        <a href={post.videoUrl} target="_blank" rel="noopener noreferrer">Yayını izle</a>
+      </p>
     )}
     {post.sourceUrl && (
       <p class="source-link">

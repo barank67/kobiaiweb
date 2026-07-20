@@ -1,0 +1,57 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { allRadioTvPosts, fallbackPressImage, pressPerPage } from "../../../data/press";
+
+const pagePosts = allRadioTvPosts.slice(0, pressPerPage);
+const totalPages = Math.ceil(allRadioTvPosts.length / pressPerPage);
+---
+<BaseLayout
+  title="Radyo Televizyon - Basında Biz - Kobi ai"
+  description="Kobi AI hakkında radyo, televizyon, canlı yayın ve ses kayıtları."
+>
+  <section class="page-hero light-page-hero">
+    <div class="reveal-box">
+      <p>Basında Biz</p>
+      <h1>Kobi AI radyo televizyon kayıtları</h1>
+    </div>
+  </section>
+  <section class="section blog-listing">
+    {pagePosts.length > 0 ? (
+      <>
+        <div class="blog-grid">
+          {pagePosts.map((post) => (
+            <a class="blog-card lift-card" href={`/basinda-biz/${post.slug}/`}>
+              <figure>
+                <img
+                  src={post.image || fallbackPressImage}
+                  alt={post.title}
+                  width="640"
+                  height="400"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+              <div>
+                <h2>{post.title}</h2>
+                <p>{post.excerpt}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+        {totalPages > 1 && (
+          <nav class="pagination" aria-label="Radyo Televizyon sayfaları">
+            <span class="is-current">1</span>
+            {Array.from({ length: totalPages - 1 }, (_, index) => (
+              <a href={`/basinda-biz/radyo-televizyon/page/${index + 2}/`}>{index + 2}</a>
+            ))}
+          </nav>
+        )}
+      </>
+    ) : (
+      <div class="empty-state">
+        <h2>Radyo Televizyon kayıtları yakında eklenecek.</h2>
+        <p>Bu bölümde Kobi AI hakkındaki canlı yayın, video ve ses kayıtları listelenecek.</p>
+      </div>
+    )}
+  </section>
+</BaseLayout>

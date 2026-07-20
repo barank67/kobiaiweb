@@ -86,7 +86,14 @@ export const navItems = [
     children: solutionPages.map(({ title, href }) => ({ label: title, href }))
   },
   { label: "Blog", href: "/blog/" },
-  { label: "Basında Biz", href: "/basinda-biz/" },
+  {
+    label: "Basında Biz",
+    href: "/basinda-biz/",
+    children: [
+      { label: "Yazılı Basın", href: "/basinda-biz/" },
+      { label: "Radyo Televizyon", href: "/basinda-biz/radyo-televizyon/" }
+    ]
+  },
   { label: "İletişim", href: "/#iletisim" }
 ];
 
