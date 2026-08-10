@@ -110,6 +110,9 @@ const outcomeItems = [
         Yanlışlıkla ödeme yaptıysanız tüm tutarı 24 saat içinde iade alabilirsiniz.
         24 saatten sonra iade yapılmaz.
       </p>
+      <p class="workshop-payment-note">
+        Ödeme alan Kobiai markası coach.perda.com.tr olarak görünür.
+      </p>
     </div>
 
     <form
@@ -119,7 +122,7 @@ const outcomeItems = [
       action={workshopPaymentEndpoint || undefined}
     >
       <input type="hidden" name="product" value="software-development-workshop" />
-      <input type="hidden" name="amount_tl" value="10" />
+      <input type="hidden" name="amount_tl" value="44000" />
       <label>
         <span>Ad *</span>
         <input type="text" name="first_name" autocomplete="given-name" required />
