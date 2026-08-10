@@ -1916,11 +1916,8 @@ img {
 
 .workshop-payment-note {
   margin: 0;
-  padding: 12px 14px;
-  border: 1px solid rgba(181, 18, 34, 0.2);
-  border-radius: 8px;
-  background: rgba(181, 18, 34, 0.06);
   color: var(--text);
+  font-size: 14px;
   font-weight: 800;
   line-height: 1.45;
 }
