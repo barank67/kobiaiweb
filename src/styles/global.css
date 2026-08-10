@@ -1916,6 +1916,10 @@ img {
 
 .workshop-payment-note {
   margin: 0;
+}
+
+.workshop-payment-note span {
+  display: block;
   color: var(--text);
   font-size: 14px;
   font-weight: 800;
