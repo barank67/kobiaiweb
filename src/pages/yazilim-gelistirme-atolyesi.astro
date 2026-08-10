@@ -1,0 +1,215 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const workshopPaymentEndpoint = import.meta.env.PUBLIC_WORKSHOP_PAYMENT_ENDPOINT ?? "";
+const workshopPaymentUrl = import.meta.env.PUBLIC_WORKSHOP_PAYMENT_URL ?? "";
+
+const workshopFacts = [
+  { label: "Süre", value: "9 hafta x 1,5 saat" },
+  { label: "Başlangıç", value: "21 Eylül haftası" },
+  { label: "Ücret", value: "44.000 TL KDV dahil" }
+];
+
+const audienceItems = [
+  "Deneyimli olup kendisini geliştirmek isteyenler",
+  "Deneyimi olmayıp yazılım geliştirmek isteyenler",
+  "Kendi ihtiyacına uygun gerçek bir uygulama üretmek isteyenler"
+];
+
+const outcomeItems = [
+  "9 hafta boyunca kendi ihtiyacınız olan yazılımı geliştirirsiniz.",
+  "Atölye sonunda farklı uygulamalarınız olur.",
+  "Yeni uygulamalar geliştirecek pratik yetkinlik kazanırsınız."
+];
+---
+<BaseLayout
+  title="Baran Kaya ile Birlikte Yazılım Geliştirme Atölyesi"
+  description="9 haftalık yaparak öğrenme atölyesi: kendi ihtiyacınız olan yazılımı Baran Kaya ile birlikte geliştirin."
+  image="https://barankaya.com.tr/assets/img/baran-kaya.webp"
+>
+  <section class="workshop-hero">
+    <div class="workshop-hero-copy">
+      <p class="eyebrow">Yaparak öğrenme atölyesi</p>
+      <h1>Baran Kaya ile Birlikte Yazılım Geliştirme Atölyesi</h1>
+      <p>
+        En iyi öğrenme şekli yaparak öğrenmektir diyorsanız, 9 hafta boyunca
+        kendi ihtiyacınız olan yazılımı birlikte geliştirelim.
+      </p>
+      <div class="workshop-actions">
+        <a class="button primary" href="#kayit">Atölyeye kaydol</a>
+        <a class="button light" href="https://calendar.app.google/giXLd1K3atyj6s6R8" target="_blank" rel="noopener noreferrer">
+          Ücretsiz tanışma toplantısı
+        </a>
+      </div>
+    </div>
+    <figure class="workshop-portrait">
+      <img
+        src="https://barankaya.com.tr/assets/img/baran-kaya.webp"
+        alt="Baran Kaya"
+        width="900"
+        height="1100"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </figure>
+  </section>
+
+  <section class="workshop-strip" aria-label="Atölye bilgileri">
+    {workshopFacts.map((item) => (
+      <div>
+        <span>{item.label}</span>
+        <strong>{item.value}</strong>
+      </div>
+    ))}
+  </section>
+
+  <section class="workshop-section workshop-two-column">
+    <div>
+      <p class="eyebrow">Program</p>
+      <h2>9 hafta sonunda sadece öğrenmiş değil, üretmiş olursunuz.</h2>
+      <p>
+        Yapay zeka ile artık isteyen herkes yazılım geliştirebilir. Bu atölyede
+        hazır örnekler üzerinden değil, gerçek ihtiyacınız üzerinden ilerleriz.
+      </p>
+    </div>
+    <div class="workshop-list">
+      {outcomeItems.map((item) => <p>{item}</p>)}
+    </div>
+  </section>
+
+  <section class="workshop-section workshop-profile">
+    <div>
+      <p class="eyebrow">Baran Kaya</p>
+      <h2>35+ yıllık yazılım geliştirme deneyimi</h2>
+      <p>
+        KOBİ'lerden çok uluslu şirketlere, kamu kurumlarından hastanelere kadar
+        her boyutta şirkete yazılım geliştirme ve dijital dönüşüm deneyimi.
+      </p>
+      <div class="workshop-links">
+        <a href="https://barankaya.com.tr/" target="_blank" rel="noopener noreferrer">barankaya.com.tr</a>
+        <a href="https://kobiai.com.tr/" target="_blank" rel="noopener noreferrer">Şirketi hakkında bilgi</a>
+      </div>
+    </div>
+    <div class="workshop-list">
+      <h3>Kimler katılabilir?</h3>
+      {audienceItems.map((item) => <p>{item}</p>)}
+    </div>
+  </section>
+
+  <section class="workshop-section workshop-checkout" id="kayit">
+    <div class="workshop-checkout-copy">
+      <p class="eyebrow">Kayıt</p>
+      <h2>Atölyeye kaydol</h2>
+      <p>
+        Ödeme öncesinde ad, soyad ve e-posta adresi zorunludur. Fatura tercihinizi
+        aynı formda belirtebilirsiniz.
+      </p>
+      <p class="workshop-refund">
+        Yanlışlıkla ödeme yaptıysanız tüm tutarı 24 saat içinde iade alabilirsiniz.
+        24 saatten sonra iade yapılmaz.
+      </p>
+    </div>
+
+    <form class="workshop-form" id="workshop-payment-form">
+      <input type="hidden" name="product" value="software-development-workshop" />
+      <input type="hidden" name="amount_tl" value="44000" />
+      <label>
+        <span>Ad *</span>
+        <input type="text" name="first_name" autocomplete="given-name" required />
+      </label>
+      <label>
+        <span>Soyad *</span>
+        <input type="text" name="last_name" autocomplete="family-name" required />
+      </label>
+      <label>
+        <span>E-posta *</span>
+        <input type="email" name="email" autocomplete="email" required />
+      </label>
+      <label>
+        <span>Telefon</span>
+        <input type="tel" name="phone" autocomplete="tel" />
+      </label>
+      <label class="workshop-form-wide">
+        <span>Fatura adresi</span>
+        <textarea name="address" rows="3"></textarea>
+      </label>
+      <label class="workshop-checkbox workshop-form-wide">
+        <input id="corporate_invoice" type="checkbox" name="corporate_invoice" value="1" />
+        <span>Kurumsal fatura istiyorum</span>
+      </label>
+      <div class="workshop-corporate-fields workshop-form-wide" id="workshop-corporate-fields" hidden>
+        <label>
+          <span>Şirket unvanı *</span>
+          <input id="company_name" type="text" name="company_name" autocomplete="organization" />
+        </label>
+        <label>
+          <span>Vergi no *</span>
+          <input id="tax_number" type="text" name="tax_number" inputmode="numeric" />
+        </label>
+      </div>
+      <label class="workshop-checkbox workshop-form-wide">
+        <input type="checkbox" name="accept_distance_sales" required />
+        <span>
+          <a href="/yazilim-gelistirme-atolyesi/mesafeli-satis-sozlesmesi/" target="_blank" rel="noopener noreferrer">
+            Mesafeli Satış Sözleşmesi
+          </a>'ni ve
+          <a href="/yazilim-gelistirme-atolyesi/teslimat-ve-iade/" target="_blank" rel="noopener noreferrer">
+            teslimat ve iade koşullarını
+          </a>
+          okudum, kabul ediyorum.
+        </span>
+      </label>
+      <button class="button primary workshop-form-wide" type="submit">Ödemeye geç</button>
+      <p class="workshop-payment-status workshop-form-wide" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <script define:vars={{ workshopPaymentEndpoint, workshopPaymentUrl }}>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.querySelector("#workshop-payment-form");
+      const corporateToggle = document.querySelector("#corporate_invoice");
+      const corporateFields = document.querySelector("#workshop-corporate-fields");
+      const companyName = document.querySelector("#company_name");
+      const taxNumber = document.querySelector("#tax_number");
+      const status = document.querySelector(".workshop-payment-status");
+
+      corporateToggle?.addEventListener("change", () => {
+        const enabled = corporateToggle.checked;
+        corporateFields.hidden = !enabled;
+        if (companyName) companyName.required = enabled;
+        if (taxNumber) taxNumber.required = enabled;
+      });
+
+      form?.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+
+        const data = new FormData(form);
+        if (workshopPaymentEndpoint) {
+          const postForm = document.createElement("form");
+          postForm.method = "post";
+          postForm.action = workshopPaymentEndpoint;
+          postForm.style.display = "none";
+          for (const [key, value] of data.entries()) {
+            const input = document.createElement("input");
+            input.type = "hidden";
+            input.name = key;
+            input.value = value;
+            postForm.appendChild(input);
+          }
+          document.body.appendChild(postForm);
+          postForm.submit();
+          return;
+        }
+
+        if (workshopPaymentUrl) {
+          window.location.href = workshopPaymentUrl;
+          return;
+        }
+
+        status.textContent = "Ödeme bağlantısı henüz yapılandırılmadı. Kayıt için lütfen ücretsiz tanışma toplantısı bağlantısından uygun zamanı seçin.";
+      });
+    });
+  </script>
+</BaseLayout>
