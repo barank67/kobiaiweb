@@ -1,7 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const workshopPaymentEndpoint = import.meta.env.PUBLIC_WORKSHOP_PAYMENT_ENDPOINT ?? "";
+const workshopPaymentEndpoint =
+  import.meta.env.PUBLIC_WORKSHOP_PAYMENT_ENDPOINT ||
+  "https://coach.perda.com.tr/workshop/checkout/";
 
 const workshopFacts = [
   { label: "Süre", value: "9 hafta x 1,5 saat" },
@@ -110,7 +112,12 @@ const outcomeItems = [
       </p>
     </div>
 
-    <form class="workshop-form" id="workshop-payment-form">
+    <form
+      class="workshop-form"
+      id="workshop-payment-form"
+      method="post"
+      action={workshopPaymentEndpoint || undefined}
+    >
       <input type="hidden" name="product" value="software-development-workshop" />
       <input type="hidden" name="amount_tl" value="10" />
       <label>
@@ -181,27 +188,11 @@ const outcomeItems = [
       });
 
       form?.addEventListener("submit", (event) => {
-        event.preventDefault();
-        if (!form.reportValidity()) return;
-
-        const data = new FormData(form);
         if (workshopPaymentEndpoint) {
-          const postForm = document.createElement("form");
-          postForm.method = "post";
-          postForm.action = workshopPaymentEndpoint;
-          postForm.style.display = "none";
-          for (const [key, value] of data.entries()) {
-            const input = document.createElement("input");
-            input.type = "hidden";
-            input.name = key;
-            input.value = value;
-            postForm.appendChild(input);
-          }
-          document.body.appendChild(postForm);
-          postForm.submit();
           return;
         }
 
+        event.preventDefault();
         status.textContent = "Ödeme bağlantısı henüz yapılandırılmadı. Kayıt için lütfen ücretsiz tanışma toplantısı bağlantısından uygun zamanı seçin.";
       });
     });
