@@ -36,6 +36,7 @@ jobs:
         env:
           PUBLIC_CONTACT_ENDPOINT: ${{ vars.PUBLIC_CONTACT_ENDPOINT }}
           PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.PUBLIC_TURNSTILE_SITE_KEY }}
+          PUBLIC_WORKSHOP_PAYMENT_ENDPOINT: ${{ vars.PUBLIC_WORKSHOP_PAYMENT_ENDPOINT }}
         run: pnpm build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4

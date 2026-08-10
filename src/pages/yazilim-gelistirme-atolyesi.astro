@@ -2,7 +2,6 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const workshopPaymentEndpoint = import.meta.env.PUBLIC_WORKSHOP_PAYMENT_ENDPOINT ?? "";
-const workshopPaymentUrl = import.meta.env.PUBLIC_WORKSHOP_PAYMENT_URL ?? "";
 
 const workshopFacts = [
   { label: "Süre", value: "9 hafta x 1,5 saat" },
@@ -113,7 +112,7 @@ const outcomeItems = [
 
     <form class="workshop-form" id="workshop-payment-form">
       <input type="hidden" name="product" value="software-development-workshop" />
-      <input type="hidden" name="amount_tl" value="44000" />
+      <input type="hidden" name="amount_tl" value="10" />
       <label>
         <span>Ad *</span>
         <input type="text" name="first_name" autocomplete="given-name" required />
@@ -165,7 +164,7 @@ const outcomeItems = [
     </form>
   </section>
 
-  <script define:vars={{ workshopPaymentEndpoint, workshopPaymentUrl }}>
+  <script define:vars={{ workshopPaymentEndpoint }}>
     document.addEventListener("DOMContentLoaded", () => {
       const form = document.querySelector("#workshop-payment-form");
       const corporateToggle = document.querySelector("#corporate_invoice");
@@ -200,11 +199,6 @@ const outcomeItems = [
           }
           document.body.appendChild(postForm);
           postForm.submit();
-          return;
-        }
-
-        if (workshopPaymentUrl) {
-          window.location.href = workshopPaymentUrl;
           return;
         }
 
