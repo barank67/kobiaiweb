@@ -3,12 +3,27 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { allPressItems, fallbackPressImage } from "../../data/press";
 
 export function getStaticPaths() {
-  return allPressItems.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+  return allPressItems.flatMap((post) => {
+    const canonicalPath = `/basinda-biz/${post.slug}/`;
+    const paths = [{ params: { slug: post.slug }, props: { post, canonicalPath } }];
+
+    try {
+      const decodedSlug = decodeURIComponent(post.slug);
+      if (decodedSlug !== post.slug) {
+        paths.push({ params: { slug: decodedSlug }, props: { post, canonicalPath } });
+      }
+    } catch {
+      // Keep the original slug only when legacy data contains malformed escape sequences.
+    }
+
+    return paths;
+  });
 }
 
-const { post } = Astro.props;
+const { post, canonicalPath } = Astro.props;
 const image = post.image || fallbackPressImage;
 const isDirectVideo = post.videoUrl && /\.(mp4|webm|ogg)(?:$|\?)/i.test(post.videoUrl);
+const canonicalUrl = new URL(canonicalPath, Astro.site ?? Astro.url.origin).toString();
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "NewsArticle",
@@ -18,7 +33,7 @@ const jsonLd = {
   datePublished: post.date,
   dateModified: post.date,
   publisher: { "@type": "Organization", name: "Kobi AI" },
-  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString()
+  mainEntityOfPage: canonicalUrl
 };
 ---
 <BaseLayout
@@ -27,6 +42,7 @@ const jsonLd = {
   image={image}
   type="article"
   publishedTime={post.date}
+  canonical={canonicalUrl}
 >
   <section class="page-hero light-page-hero blog-detail-hero">
     <div class="reveal-box">
