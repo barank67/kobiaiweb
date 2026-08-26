@@ -1,12 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { solutionPages } from "../data/site";
+import { normalizeEmbeddedHeadings } from "../utils/seo";
 
 export function getStaticPaths() {
   return solutionPages.map((solution) => ({ params: { slug: solution.slug }, props: { solution } }));
 }
 
 const { solution } = Astro.props;
+const contentHtml = solution.contentHtml ? normalizeEmbeddedHeadings(solution.contentHtml) : null;
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Service",
@@ -27,9 +29,9 @@ const jsonLd = {
       <h1>{solution.title}</h1>
     </div>
   </section>
-  {solution.contentHtml ? (
+  {contentHtml ? (
     <section class="section">
-      <article class="solution-content" set:html={solution.contentHtml} />
+      <article class="solution-content" set:html={contentHtml} />
       <div class="solution-cta">
         <a class="button primary" href="/#iletisim">Demo Planla</a>
       </div>

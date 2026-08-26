@@ -1257,7 +1257,9 @@ img {
 .solution-content h3,
 .solution-content h4,
 .solution-content h5,
-.solution-content h6 {
+.solution-content h6,
+.solution-content .content-kicker,
+.solution-content .content-step {
   color: var(--text);
   line-height: 1.16;
 }
@@ -1283,7 +1285,9 @@ img {
 }
 
 .solution-content h5,
-.solution-content h6 {
+.solution-content h6,
+.solution-content .content-kicker,
+.solution-content .content-step {
   margin: 20px 0 10px;
   color: var(--red);
   font-size: 14px;
@@ -1291,7 +1295,8 @@ img {
   text-transform: uppercase;
 }
 
-.solution-content h6 {
+.solution-content h6,
+.solution-content .content-step {
   display: inline-grid;
   place-items: center;
   width: 44px;

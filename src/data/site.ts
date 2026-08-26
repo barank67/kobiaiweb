@@ -6,7 +6,7 @@ const baseSolutionPages = [
   {
     title: "Satın Alma Süreçlerinde Tam Optimizasyon",
     slug: "yapay-zeka-ile-satin-alma",
-    text: "Stok, sipariş ve teslimat döngünüzü analiz ederek işletmenize özel, zamanında ve doğru miktarda satın alma listeleri oluşturur. Fazla stoktan ve ürün eksikliğinden doğan kayıpları önler.",
+    text: "Stok, sipariş ve teslimat döngünüzü analiz ederek doğru zamanda doğru miktarda satın alma listeleri oluşturur, stok kaynaklı kayıpları azaltır.",
     detail:
       "Kobi AI, geçmiş tüketim verileri, mevsimsel trendler, tedarikçi performansı ve üretim planlarını birlikte değerlendirerek satın alma ekipleri için uygulanabilir sipariş önerileri üretir.",
     benefits: ["Stok fazlası ve stok yokluğu riskini azaltır", "Tedarikçi tekliflerini karşılaştırmayı hızlandırır", "Satın alma kararlarını ölçülebilir veriye bağlar"]
@@ -31,7 +31,7 @@ const baseSolutionPages = [
     title: "İşletmenize Özel Akıllı Asistan",
     slug: "akilli-asistan",
     sourceSlug: "yapay-zeka-asistani",
-    text: "Yapay zeka tabanlı chatbot, müşteri sorularını anında yanıtlar, satış süreçlerini hızlandırır ve operasyonel yükü azaltır. Müşteri memnuniyetini artırırken ekiplerinize zaman kazandırır.",
+    text: "Yapay zeka tabanlı chatbot müşteri sorularını anında yanıtlar, satış süreçlerini hızlandırır ve ekiplerin operasyonel yükünü azaltır.",
     detail:
       "Ürün, hizmet ve süreç bilgilerinizi öğrenen yapay zeka asistanı; müşterilerinizin ve ekiplerinizin sorularına günün her saati tutarlı cevaplar verebilir.",
     benefits: ["7/24 müşteri iletişimi sağlar", "Tekrarlı soruları otomatik karşılar", "Satış ve destek ekiplerinin iş yükünü azaltır"]
@@ -47,7 +47,7 @@ const baseSolutionPages = [
   {
     title: "Dinamik Üretim Planlaması",
     slug: "uretim-planlama",
-    text: "Üretim hattındaki verileri anlık olarak değerlendirir, koşullar değiştiğinde üretim planlarını saniyeler içinde günceller. Verimlilikte süreklilik ve minimum hata ile üretim sağlanır.",
+    text: "Üretim verilerini anlık değerlendirir, koşullar değiştiğinde planları saniyeler içinde günceller ve daha verimli üretim sağlar.",
     detail:
       "Üretim planlama ajanları, kapasite kullanımını, malzeme ihtiyaçlarını ve teslim tarihlerini analiz ederek daha isabetli planlama kararları alınmasına yardımcı olur.",
     benefits: ["Teslim tarihi sapmalarını azaltır", "Kapasite ve stok dengesini izlenebilir hale getirir", "Planlama ekibine erken uyarı sinyalleri verir"]
@@ -55,7 +55,7 @@ const baseSolutionPages = [
   {
     title: "Yapay Zeka Strateji ve Uygulama Danışmanlığı",
     slug: "yapay-zeka-danismanligi",
-    text: "İhtiyacınıza özel yapay zeka çözümlerini belirler, uygulama sürecini uçtan uca yönetiriz. Teknolojiyi karmaşık olmaktan çıkarır, işinize değer katan bir araca dönüştürürüz.",
+    text: "İhtiyacınıza özel yapay zeka çözümlerini belirler, uygulama sürecini uçtan uca yönetir ve teknolojiyi işinize değer katan araca dönüştürürüz.",
     detail:
       "Süreç analizi, veri hazırlığı, ajan tasarımı ve pilot uygulama adımlarını birlikte ele alarak yapay zeka yatırımının iş hedefleriyle uyumlu ilerlemesini sağlarız.",
     benefits: ["Öncelikli kullanım alanlarını netleştirir", "Pilot projeleri ölçülebilir kılar", "Ekiplerin yapay zekayı benimsemesini kolaylaştırır"]

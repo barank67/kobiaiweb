@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { allPressItems, fallbackPressImage } from "../../data/press";
+import { normalizeEmbeddedHeadings, withBrandSuffix } from "../../utils/seo";
 
 export function getStaticPaths() {
   return allPressItems.flatMap((post) => {
@@ -24,6 +25,8 @@ const { post, canonicalPath } = Astro.props;
 const image = post.image || fallbackPressImage;
 const isDirectVideo = post.videoUrl && /\.(mp4|webm|ogg)(?:$|\?)/i.test(post.videoUrl);
 const canonicalUrl = new URL(canonicalPath, Astro.site ?? Astro.url.origin).toString();
+const metaTitle = withBrandSuffix(post.seoTitle || post.title);
+const articleHtml = post.contentHtml ? normalizeEmbeddedHeadings(post.contentHtml) : null;
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "NewsArticle",
@@ -37,7 +40,7 @@ const jsonLd = {
 };
 ---
 <BaseLayout
-  title={`${post.seoTitle || post.title} - Kobi ai`}
+  title={metaTitle}
   description={post.seoDescription || post.excerpt}
   image={image}
   type="article"
@@ -55,8 +58,8 @@ const jsonLd = {
       <img src={image} alt={post.title} loading="eager" />
     </figure>
     <p class="article-lead">{post.excerpt}</p>
-    {post.contentHtml ? (
-      <div class="article-html" set:html={post.contentHtml} />
+    {articleHtml ? (
+      <div class="article-html" set:html={articleHtml} />
     ) : (
       post.content.split(/\n+/).filter(Boolean).map((paragraph) => <p>{paragraph}</p>)
     )}
