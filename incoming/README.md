@@ -18,6 +18,8 @@ Kurallar:
 - Ikinci veya ara gorsel varsa, Markdown icinde kullanilacagi yere standart gorsel satiri olarak ekleyin: `![Alt metin](./slug-adi-ara-gorsel-1.jpg)`.
 - Birlikte gonderilen yazilar birbirine link veriyorsa, henuz yayinda olmasa bile planlanan nihai path kullanin: `/blog/slug-adi/` veya `/basinda-biz/slug-adi/`.
 - Frontmatter kurallari icin `../CONTENT_GUIDE.md` dosyasini kullanin.
+- Her yeni blog veya basin icerigi icin herhangi bir dosya eklemeden, tasimadan veya deploy yapmadan once frontmatter `slug` degerini `src/data/blog.generated.json`, `src/data/press.generated.json`, `src/data/solutions.generated.json` ve mevcut sayfa route'lari ile karsilastirin. Ayni teslimattaki yeni dosyalarin slug'lari da birbirinden farkli olmalidir.
+- Ayni slug varsa tum icerik ekleme ve deploy islemini durdurun. Kullaniciya `Slug kullanilmis: <slug>` bilgisini ve mevcut kaydin yolunu verin. Slug'i otomatik degistirmeyin, mevcut kaydi ezmeyin ve gelen kaynaklari tasimayin.
 - Icerik siteye eklendikten sonra bu klasorden asil data/assets klasorlerine tasinir.
 - Basariyla islenen kaynaklar `processed/slug-tarih/` altina, yayinlanamayacak durumdaki kaynaklar `rejected/slug-tarih/` altina ayrilir.
 
@@ -26,8 +28,8 @@ Kurallar:
 Bir sonraki `type: press` dosyasi geldiginde tek seferde su adimlari uygulayin:
 
 1. `incoming/` kokunde `README.md` ve `processed/` disinda kalan yeni `.md` veya `.docx` dosyalarini ve ayni slug ile baslayan gorselleri listeleyin.
-2. Icerigi okumadan once mevcut kayitlarda ayni veya benzer slug var mi kontrol edin: `src/data/press.generated.json`.
-3. Ayni slug varsa ve kaynak farkliysa yeni slug'a kaynak ekleyin. Ornek: `...-comprisetech`. Ayni haber birebir tekrar ise yayinlamayin, kaynak dosyayi processed altina tasimadan once not alin.
+2. Frontmatter slug'ini okuyup yukaridaki genel slug kontrolunu uygulayin; benzer slug'lari da tekrar haber acisindan inceleyin.
+3. Ayni slug varsa kaynak farkli olsa bile islemi durdurun ve `Slug kullanilmis: <slug>` bilgisini verin. Otomatik ek/sonek eklemeyin. Slug farkli olsa bile ayni haber birebir tekrar ise yayinlamayin ve kaynaklari tasimadan kullaniciya bildirin.
 4. `.docx` dosyasi geldiyse frontmatter alanlarini metinden cikarin. Word bazen kapanis `---` satirini govdeyle ayni paragrafa koyabilir; bu durumda govdeyi basliktan itibaren elle ayiklayin.
 5. Frontmatter hatalarini duzeltin:
    - `title` sonunda fazladan tirnak varsa kaldirin.
