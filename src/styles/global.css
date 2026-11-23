@@ -88,6 +88,20 @@ img {
   font-weight: 700;
 }
 
+.menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--text);
+  cursor: pointer;
+}
+
 .main-nav a:hover,
 .nav-item:focus-within > a {
   color: var(--red);
@@ -2023,11 +2037,70 @@ img {
 
 @media (max-width: 980px) {
   .site-header {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr auto auto;
+    gap: 8px;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  .site-header .brand-logo {
+    max-width: 100%;
+    height: auto;
+    max-height: 40px;
   }
 
   .main-nav {
     display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: calc(100dvh - 80px);
+    overflow-y: auto;
+    padding: 16px;
+    border-bottom: 1px solid var(--line);
+    background: var(--white);
+    box-shadow: var(--shadow);
+  }
+
+  .main-nav.is-open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+  }
+
+  .main-nav > a,
+  .nav-item > a {
+    min-height: 44px;
+    white-space: normal;
+  }
+
+  .nav-menu {
+    position: static;
+    width: auto;
+    padding: 0 0 8px 12px;
+    border: 0;
+    border-left: 2px solid var(--line);
+    border-radius: 0;
+    box-shadow: none;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-menu,
+  .nav-item:hover .nav-menu,
+  .nav-item:focus-within .nav-menu {
+    transform: none;
+    transition: none;
+  }
+
+  .nav-menu a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
   }
 
   .hero,
