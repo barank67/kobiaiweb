@@ -15,6 +15,7 @@ Kurallar:
 - Markdown ve gorsel dosyasinin adi mumkunse ayni `slug` ile baslasin.
 - Gorsel `.webp` degilse siteye eklenirken `.webp` formatina cevrilir.
 - `image` alanindaki gorsel ana gorseldir.
+- Aksi kullanici tarafindan acikca belirtilmedikce tum videolar bastan (0:00) baslamalidir. Kaynak linkte zaman bilgisi bulunsa bile `embedUrl`, `videoUrl` ve `sourceUrl` alanlarindaki `start`, `t`, `time_continue` parametrelerini ve `#t=...` gibi zaman parcalarini kaldirin. Belirli bir baslangic zamani yalnizca kullanici acikca istediginde kullanilir.
 - Ikinci veya ara gorsel varsa, Markdown icinde kullanilacagi yere standart gorsel satiri olarak ekleyin: `![Alt metin](./slug-adi-ara-gorsel-1.jpg)`.
 - Birlikte gonderilen yazilar birbirine link veriyorsa, henuz yayinda olmasa bile planlanan nihai path kullanin: `/blog/slug-adi/` veya `/basinda-biz/slug-adi/`.
 - Frontmatter kurallari icin `../CONTENT_GUIDE.md` dosyasini kullanin.
